@@ -2,119 +2,94 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"os"
-	//"time"
-	//"log"
 
-	//"github.com/dsyx/serialport-go"
+	"rendellc/gtty/models"
+
 	tea "github.com/charmbracelet/bubbletea"
 )
 
-//type SerialConnection struct {
-//	Device string
-//	Config serialport.Config
-//}
+// func createReaderRoutine(filename string) (<-chan string, chan<- int)  {
+// 	content := make(chan string)
+// 	commands := make(chan int)
+//
+// 	go func(filename string, content chan<- string, commands <-chan int) {
+// 		file, err := os.Open(filename)
+// 		if err != nil {
+// 			log.Panic(err)
+// 		}
+// 		defer file.Close()
+//
+// 		scanner := bufio.NewScanner(file)
+// 		for scanner.Scan() {
+// 			content <- scanner.Text()
+//
+// 			select {
+// 			case <-commands:
+// 				log.Println("Command received. Quitting")
+// 				close(content)
+// 				return
+// 			default:
+// 			}
+// 		}
+// 	}(filename, content, commands)
+//
+// 	return content, commands
+// }
 
-type model struct {
-	choices []string
-	cursor int
-	selected map[int]struct{}
+type app struct {
+	commandInput models.CommandInputModel
+	terminalLog  models.TerminalLog
 }
 
-func initializeModel() model {
-	return model{
-		choices: []string{"Buy carrots", "Buy celery", "Buy kohlrabi"},
-		selected: make(map[int]struct{}),
-	}
-}
-
-func (m model) Init() tea.Cmd {
+func (a app) Init() tea.Cmd {
+	log.Println("Initialize app")
 	return nil
 }
 
-func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
+func (a app) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
+	log.Printf("Update app component: %T %+v\n", msg, msg)
 	switch msg := msg.(type) {
-
 	case tea.KeyMsg:
-		switch msg.String(){
-			case "ctrl+c", "q":
-				return m, tea.Quit
-
-			case "up", "k":
-				if m.cursor > 0 {
-					m.cursor--
-				}
-			case "down", "j":
-				if m.cursor < len(m.choices) - 1 {
-					m.cursor++
-				}
-			case "enter", " ":
-				_, ok := m.selected[m.cursor]
-				if ok {
-					delete(m.selected, m.cursor)
-				} else {
-					m.selected[m.cursor] = struct{}{}
-
-				}
+		switch msg.Type {
+		case tea.KeyCtrlC, tea.KeyEsc:
+			return a, tea.Quit
 		}
+
 	}
 
-	return m, nil
+	inputModel, cmd1 := a.commandInput.Update(msg)
+	logModel, cmd2 := a.terminalLog.Update(msg)
+
+	a.commandInput = inputModel.(models.CommandInputModel)
+	a.terminalLog = logModel.(models.TerminalLog)
+
+	return a, tea.Batch(cmd1, cmd2)
 }
 
-func (m model) View() string { 
-	s := "What should we buy at the market?\n\n"
-
-	for i, choice := range m.choices {
-		cursor := " "
-		if m.cursor == i {
-			cursor = ">"
-		}
-
-		checked := " "
-		if _, ok := m.selected[i]; ok {
-			checked = "x"
-		}
-
-		s += fmt.Sprintf("%s [%s] %s\n", cursor, checked, choice)
-	}
-
-
-	s += "\n"
-	s += "Press q to quit.\n"
-
-	return s
+func (a app) View() string {
+	return fmt.Sprintf("%s\n\n%s",
+		a.commandInput.View(),
+		a.terminalLog.View(),
+	)
 }
 
-func main(){
-	p := tea.NewProgram(initializeModel())
-	if _, err := p.Run(); err != nil {
-		fmt.Printf("Alas, there has been an error: %v", err)
-		os.Exit(1)
+func main() {
+	if len(os.Getenv("DEBUG")) > 0 {
+		f, err := tea.LogToFile("debug.log", "debug")
+		if err != nil {
+			fmt.Println("fatal:", err)
+			os.Exit(1)
+		}
+		defer f.Close()
 	}
 
-	//conn := SerialConnection{
-	//	Device: "COM8",
-	//	Config: serialport.Config{
-	//		BaudRate: serialport.BR9600,
-	//		DataBits: serialport.DB8,
-	//		StopBits: serialport.SB1,
-	//		Parity: serialport.PO,
-	//		Timeout: 100 * time.Millisecond,
-	//	},
-	//}
-	//sp, err := serialport.Open(conn.Device, conn.Config)
-	//if err != nil {
-	//	log.Fatalln(err)
-	//}
-	//defer sp.Close()
-
-
-	//fmt.Println("Device is open")
-
-	//buf := make([]byte, 1024)
-	//for {
-	//	n, _ := sp.Read(buf)
-	//	fmt.Printf("%s", string(buf[:n]))
-	//}
+	app := app{
+		commandInput: models.CreateCommandInput(),
+		terminalLog:  models.CreateTerminalLog(),
+	}
+	if _, err := tea.NewProgram(app).Run(); err != nil {
+		log.Fatal(err)
+	}
 }

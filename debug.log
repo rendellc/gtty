@@ -1,0 +1,923 @@
+debug 2023/10/29 13:23:43 Initialize app component
+debug 2023/10/29 13:24:52 Initialize app
+debug 2023/10/29 13:24:52 Update app component
+debug 2023/10/29 13:26:11 Initialize app
+debug 2023/10/29 13:26:11 Update app component
+debug 2023/10/29 13:26:11 Update CommndInputModel
+debug 2023/10/29 13:26:12 Update CommndInputModel
+debug 2023/10/29 13:26:13 Update CommndInputModel
+debug 2023/10/29 13:26:13 Update CommndInputModel
+debug 2023/10/29 13:26:14 Update CommndInputModel
+debug 2023/10/29 13:26:14 Update CommndInputModel
+debug 2023/10/29 13:26:15 Update CommndInputModel
+debug 2023/10/29 13:26:15 Update CommndInputModel
+debug 2023/10/29 13:26:16 Update CommndInputModel
+debug 2023/10/29 13:26:16 Update CommndInputModel
+debug 2023/10/29 13:26:17 Update CommndInputModel
+debug 2023/10/29 13:26:17 Update CommndInputModel
+debug 2023/10/29 13:26:17 Update CommndInputModel
+debug 2023/10/29 13:26:17 Update CommndInputModel
+debug 2023/10/29 13:26:18 Update CommndInputModel
+debug 2023/10/29 13:26:18 Update CommndInputModel
+debug 2023/10/29 13:26:19 Update CommndInputModel
+debug 2023/10/29 13:26:20 Update CommndInputModel
+debug 2023/10/29 13:26:20 Update CommndInputModel
+debug 2023/10/29 13:26:21 Update CommndInputModel
+debug 2023/10/29 13:26:21 Update CommndInputModel
+debug 2023/10/29 13:26:21 Update CommndInputModel
+debug 2023/10/29 13:26:21 Update CommndInputModel
+debug 2023/10/29 13:26:21 Update CommndInputModel
+debug 2023/10/29 13:26:21 Update CommndInputModel
+debug 2023/10/29 13:26:21 Update CommndInputModel
+debug 2023/10/29 13:26:21 Update CommndInputModel
+debug 2023/10/29 13:26:21 Update CommndInputModel
+debug 2023/10/29 13:26:21 Update CommndInputModel
+debug 2023/10/29 13:26:21 Update CommndInputModel
+debug 2023/10/29 13:26:22 Update CommndInputModel
+debug 2023/10/29 13:26:22 Update CommndInputModel
+debug 2023/10/29 13:26:22 Update CommndInputModel
+debug 2023/10/29 13:26:22 Update CommndInputModel
+debug 2023/10/29 13:26:22 Update CommndInputModel
+debug 2023/10/29 13:26:22 Update CommndInputModel
+debug 2023/10/29 13:26:22 Update CommndInputModel
+debug 2023/10/29 13:26:22 Update CommndInputModel
+debug 2023/10/29 13:26:22 Update CommndInputModel
+debug 2023/10/29 13:26:22 Update CommndInputModel
+debug 2023/10/29 13:26:23 Update CommndInputModel
+debug 2023/10/29 13:26:23 Update CommndInputModel
+debug 2023/10/29 13:26:23 Update CommndInputModel
+debug 2023/10/29 13:26:23 Update CommndInputModel
+debug 2023/10/29 13:26:23 Update CommndInputModel
+debug 2023/10/29 13:26:23 Update CommndInputModel
+debug 2023/10/29 13:26:23 Update CommndInputModel
+debug 2023/10/29 13:26:23 Update CommndInputModel
+debug 2023/10/29 13:26:23 Update CommndInputModel
+debug 2023/10/29 13:26:23 Update CommndInputModel
+debug 2023/10/29 13:26:23 Update CommndInputModel
+debug 2023/10/29 13:26:23 Update CommndInputModel
+debug 2023/10/29 13:26:23 Update CommndInputModel
+debug 2023/10/29 13:26:23 Update CommndInputModel
+debug 2023/10/29 13:26:23 Update CommndInputModel
+debug 2023/10/29 13:26:23 Update CommndInputModel
+debug 2023/10/29 13:26:23 Update CommndInputModel
+debug 2023/10/29 13:26:23 Update CommndInputModel
+debug 2023/10/29 13:26:23 Update CommndInputModel
+debug 2023/10/29 13:26:23 Update CommndInputModel
+debug 2023/10/29 13:26:23 Update CommndInputModel
+debug 2023/10/29 13:26:23 Update CommndInputModel
+debug 2023/10/29 13:26:23 Update CommndInputModel
+debug 2023/10/29 13:26:23 Update CommndInputModel
+debug 2023/10/29 13:26:23 Update CommndInputModel
+debug 2023/10/29 13:26:23 Update CommndInputModel
+debug 2023/10/29 13:26:23 Update CommndInputModel
+debug 2023/10/29 13:26:23 Update CommndInputModel
+debug 2023/10/29 13:26:23 Update CommndInputModel
+debug 2023/10/29 13:26:23 Update CommndInputModel
+debug 2023/10/29 13:26:23 Update CommndInputModel
+debug 2023/10/29 13:26:23 Update CommndInputModel
+debug 2023/10/29 13:26:23 Update CommndInputModel
+debug 2023/10/29 13:26:23 Update CommndInputModel
+debug 2023/10/29 13:26:23 Update CommndInputModel
+debug 2023/10/29 13:26:23 Update CommndInputModel
+debug 2023/10/29 13:26:23 Update CommndInputModel
+debug 2023/10/29 13:26:23 Update CommndInputModel
+debug 2023/10/29 13:26:23 Update CommndInputModel
+debug 2023/10/29 13:26:23 Update CommndInputModel
+debug 2023/10/29 13:26:23 Update CommndInputModel
+debug 2023/10/29 13:26:23 Update CommndInputModel
+debug 2023/10/29 13:26:23 Update CommndInputModel
+debug 2023/10/29 13:26:23 Update CommndInputModel
+debug 2023/10/29 13:26:24 Update CommndInputModel
+debug 2023/10/29 13:26:24 Update CommndInputModel
+debug 2023/10/29 13:26:24 Update CommndInputModel
+debug 2023/10/29 13:26:24 Update CommndInputModel
+debug 2023/10/29 13:26:24 Update CommndInputModel
+debug 2023/10/29 13:26:24 Update CommndInputModel
+debug 2023/10/29 13:26:24 Update CommndInputModel
+debug 2023/10/29 13:26:25 Update CommndInputModel
+debug 2023/10/29 13:26:25 Update CommndInputModel
+debug 2023/10/29 13:26:25 Update CommndInputModel
+debug 2023/10/29 13:26:25 Update CommndInputModel
+debug 2023/10/29 13:26:25 Update CommndInputModel
+debug 2023/10/29 13:26:25 Update CommndInputModel
+debug 2023/10/29 13:26:25 Update CommndInputModel
+debug 2023/10/29 13:26:25 Update CommndInputModel
+debug 2023/10/29 13:26:25 Update CommndInputModel
+debug 2023/10/29 13:26:25 Update CommndInputModel
+debug 2023/10/29 13:26:25 Update CommndInputModel
+debug 2023/10/29 13:26:25 Update CommndInputModel
+debug 2023/10/29 13:26:25 Update CommndInputModel
+debug 2023/10/29 13:26:25 Update CommndInputModel
+debug 2023/10/29 13:26:25 Update CommndInputModel
+debug 2023/10/29 13:26:25 Update CommndInputModel
+debug 2023/10/29 13:26:25 Update CommndInputModel
+debug 2023/10/29 13:26:25 Update CommndInputModel
+debug 2023/10/29 13:26:25 Update CommndInputModel
+debug 2023/10/29 13:26:25 Update CommndInputModel
+debug 2023/10/29 13:26:25 Update CommndInputModel
+debug 2023/10/29 13:26:25 Update CommndInputModel
+debug 2023/10/29 13:26:25 Update CommndInputModel
+debug 2023/10/29 13:26:25 Update CommndInputModel
+debug 2023/10/29 13:26:25 Update CommndInputModel
+debug 2023/10/29 13:26:25 Update CommndInputModel
+debug 2023/10/29 13:26:25 Update CommndInputModel
+debug 2023/10/29 13:26:25 Update CommndInputModel
+debug 2023/10/29 13:26:25 Update CommndInputModel
+debug 2023/10/29 13:26:25 Update CommndInputModel
+debug 2023/10/29 13:26:25 Update CommndInputModel
+debug 2023/10/29 13:26:25 Update CommndInputModel
+debug 2023/10/29 13:26:25 Update CommndInputModel
+debug 2023/10/29 13:26:25 Update CommndInputModel
+debug 2023/10/29 13:26:25 Update CommndInputModel
+debug 2023/10/29 13:26:25 Update CommndInputModel
+debug 2023/10/29 13:26:25 Update CommndInputModel
+debug 2023/10/29 13:26:25 Update CommndInputModel
+debug 2023/10/29 13:26:25 Update CommndInputModel
+debug 2023/10/29 13:26:25 Update CommndInputModel
+debug 2023/10/29 13:26:25 Update CommndInputModel
+debug 2023/10/29 13:26:25 Update CommndInputModel
+debug 2023/10/29 13:26:25 Update CommndInputModel
+debug 2023/10/29 13:26:25 Update CommndInputModel
+debug 2023/10/29 13:26:25 Update CommndInputModel
+debug 2023/10/29 13:26:25 Update CommndInputModel
+debug 2023/10/29 13:26:25 Update CommndInputModel
+debug 2023/10/29 13:26:25 Update CommndInputModel
+debug 2023/10/29 13:26:25 Update CommndInputModel
+debug 2023/10/29 13:26:25 Update CommndInputModel
+debug 2023/10/29 13:26:26 Update CommndInputModel
+debug 2023/10/29 13:26:26 Update CommndInputModel
+debug 2023/10/29 13:26:26 Update CommndInputModel
+debug 2023/10/29 13:26:26 Update CommndInputModel
+debug 2023/10/29 13:26:26 Update CommndInputModel
+debug 2023/10/29 13:26:26 Update CommndInputModel
+debug 2023/10/29 13:26:26 Update CommndInputModel
+debug 2023/10/29 13:26:26 Update CommndInputModel
+debug 2023/10/29 13:26:26 Update CommndInputModel
+debug 2023/10/29 13:26:26 Update CommndInputModel
+debug 2023/10/29 13:26:26 Update CommndInputModel
+debug 2023/10/29 13:27:31 Initialize app
+debug 2023/10/29 13:27:31 Update app component: %v {126 20}
+debug 2023/10/29 13:27:55 Initialize app
+debug 2023/10/29 13:27:55 Update app component: {Width:126 Height:20}
+debug 2023/10/29 13:28:28 Initialize app
+debug 2023/10/29 13:28:28 Update app component: {Width:126 Height:20}
+debug 2023/10/29 13:28:28 Update CommandInputModel: {Width:126 Height:20}
+debug 2023/10/29 13:28:29 Update CommandInputModel: a
+debug 2023/10/29 13:28:30 Update CommandInputModel: {id:0 tag:2}
+debug 2023/10/29 13:28:30 Update CommandInputModel: s
+debug 2023/10/29 13:28:30 Update CommandInputModel: {}
+debug 2023/10/29 13:28:31 Update CommandInputModel: {id:0 tag:4}
+debug 2023/10/29 13:28:31 Update CommandInputModel: {id:0 tag:5}
+debug 2023/10/29 13:28:32 Update CommandInputModel: {id:0 tag:6}
+debug 2023/10/29 13:28:32 Update CommandInputModel: {id:0 tag:7}
+debug 2023/10/29 13:28:33 Update CommandInputModel: {id:0 tag:8}
+debug 2023/10/29 13:28:33 Update CommandInputModel: c
+debug 2023/10/29 13:28:33 Update CommandInputModel: {}
+debug 2023/10/29 13:28:33 Update CommandInputModel: l
+debug 2023/10/29 13:28:33 Update CommandInputModel: {}
+debug 2023/10/29 13:28:33 Update CommandInputModel: e
+debug 2023/10/29 13:28:33 Update CommandInputModel: {}
+debug 2023/10/29 13:28:33 Update CommandInputModel: a
+debug 2023/10/29 13:28:33 Update CommandInputModel: {}
+debug 2023/10/29 13:28:33 Update CommandInputModel: r
+debug 2023/10/29 13:28:33 Update CommandInputModel: {}
+debug 2023/10/29 13:28:34 Update CommandInputModel: {id:0 tag:14}
+debug 2023/10/29 13:28:34 Update CommandInputModel: q
+debug 2023/10/29 13:28:34 Update CommandInputModel: {}
+debug 2023/10/29 13:28:34 Update CommandInputModel: esc
+debug 2023/10/29 13:30:22 Initialize app
+debug 2023/10/29 13:30:22 Update app component: {Width:126 Height:20}
+debug 2023/10/29 13:30:22 Update CommandInputModel: {Width:126 Height:20}
+debug 2023/10/29 13:30:24 Update CommandInputModel: a
+debug 2023/10/29 13:30:24 Update CommandInputModel: {id:0 tag:2}
+debug 2023/10/29 13:30:25 Update CommandInputModel: {id:0 tag:3}
+debug 2023/10/29 13:30:25 Update CommandInputModel: {id:0 tag:4}
+debug 2023/10/29 13:30:26 Update CommandInputModel: {id:0 tag:5}
+debug 2023/10/29 13:30:26 Update CommandInputModel: {id:0 tag:6}
+debug 2023/10/29 13:30:26 Update CommandInputModel: c
+debug 2023/10/29 13:30:26 Update CommandInputModel: {}
+debug 2023/10/29 13:30:26 Update CommandInputModel: l
+debug 2023/10/29 13:30:26 Update CommandInputModel: {}
+debug 2023/10/29 13:30:27 Update CommandInputModel: backspace
+debug 2023/10/29 13:30:27 Update CommandInputModel: {}
+debug 2023/10/29 13:30:27 Update CommandInputModel: backspace
+debug 2023/10/29 13:30:27 Update CommandInputModel: {}
+debug 2023/10/29 13:30:27 Update CommandInputModel: backspace
+debug 2023/10/29 13:30:27 Update CommandInputModel: {}
+debug 2023/10/29 13:30:27 Update CommandInputModel: backspace
+debug 2023/10/29 13:30:28 Update CommandInputModel: backspace
+debug 2023/10/29 13:30:28 Update CommandInputModel: {id:0 tag:12}
+debug 2023/10/29 13:30:28 Update CommandInputModel: esc
+debug 2023/10/29 13:32:46 Initialize app
+debug 2023/10/29 13:32:46 Update app component: {Width:126 Height:20}
+debug 2023/10/29 13:32:46 Update CommandInputModel: {Width:126 Height:20}
+debug 2023/10/29 13:32:51 Update app component: a
+debug 2023/10/29 13:32:51 Update CommandInputModel: a
+debug 2023/10/29 13:32:52 Update app component: {id:0 tag:2}
+debug 2023/10/29 13:32:52 Update CommandInputModel: {id:0 tag:2}
+debug 2023/10/29 13:32:53 Update app component: s
+debug 2023/10/29 13:32:53 Update CommandInputModel: s
+debug 2023/10/29 13:32:54 Update app component: {id:0 tag:2}
+debug 2023/10/29 13:32:54 Update CommandInputModel: {id:0 tag:2}
+debug 2023/10/29 13:32:57 Update app component: C
+debug 2023/10/29 13:32:57 Update CommandInputModel: C
+debug 2023/10/29 13:32:57 Update app component: l
+debug 2023/10/29 13:32:57 Update CommandInputModel: l
+debug 2023/10/29 13:32:57 Update app component: {}
+debug 2023/10/29 13:32:57 Update CommandInputModel: {}
+debug 2023/10/29 13:32:57 Update app component: e
+debug 2023/10/29 13:32:57 Update CommandInputModel: e
+debug 2023/10/29 13:32:57 Update app component: {}
+debug 2023/10/29 13:32:57 Update CommandInputModel: {}
+debug 2023/10/29 13:32:58 Update app component: a
+debug 2023/10/29 13:32:58 Update CommandInputModel: a
+debug 2023/10/29 13:32:58 Update app component: {}
+debug 2023/10/29 13:32:58 Update CommandInputModel: {}
+debug 2023/10/29 13:32:58 Update app component: r
+debug 2023/10/29 13:32:58 Update CommandInputModel: r
+debug 2023/10/29 13:32:58 Update app component: {}
+debug 2023/10/29 13:32:58 Update CommandInputModel: {}
+debug 2023/10/29 13:32:58 Update app component: {id:0 tag:2}
+debug 2023/10/29 13:32:58 Update CommandInputModel: {id:0 tag:2}
+debug 2023/10/29 13:33:06 Update app component: ctrl+c
+debug 2023/10/29 13:41:33 Initialize app
+debug 2023/10/29 13:41:33 Update app component: {Width:126 Height:20}
+debug 2023/10/29 13:41:33 Update CommandInputModel: {Width:126 Height:20}
+debug 2023/10/29 13:41:35 Update app component: a
+debug 2023/10/29 13:41:35 Update CommandInputModel: a
+debug 2023/10/29 13:41:35 Update app component: s
+debug 2023/10/29 13:41:35 Update CommandInputModel: s
+debug 2023/10/29 13:41:35 Update app component: {}
+debug 2023/10/29 13:41:35 Update CommandInputModel: {}
+debug 2023/10/29 13:41:35 Update app component: d
+debug 2023/10/29 13:41:35 Update CommandInputModel: d
+debug 2023/10/29 13:41:35 Update app component: {}
+debug 2023/10/29 13:41:35 Update CommandInputModel: {}
+debug 2023/10/29 13:41:35 Update app component: k
+debug 2023/10/29 13:41:35 Update CommandInputModel: k
+debug 2023/10/29 13:41:35 Update app component: {}
+debug 2023/10/29 13:41:35 Update CommandInputModel: {}
+debug 2023/10/29 13:41:35 Update app component: a
+debug 2023/10/29 13:41:35 Update CommandInputModel: a
+debug 2023/10/29 13:41:35 Update app component: {}
+debug 2023/10/29 13:41:35 Update CommandInputModel: {}
+debug 2023/10/29 13:41:35 Update app component: s
+debug 2023/10/29 13:41:35 Update CommandInputModel: s
+debug 2023/10/29 13:41:35 Update app component: {}
+debug 2023/10/29 13:41:35 Update CommandInputModel: {}
+debug 2023/10/29 13:41:35 Update app component: f
+debug 2023/10/29 13:41:35 Update CommandInputModel: f
+debug 2023/10/29 13:41:35 Update app component: {}
+debug 2023/10/29 13:41:35 Update CommandInputModel: {}
+debug 2023/10/29 13:41:36 Update app component: {id:0 tag:8}
+debug 2023/10/29 13:41:36 Update CommandInputModel: {id:0 tag:8}
+debug 2023/10/29 13:41:36 Update app component: {id:0 tag:9}
+debug 2023/10/29 13:41:36 Update CommandInputModel: {id:0 tag:9}
+debug 2023/10/29 13:41:36 Update app component: backspace
+debug 2023/10/29 13:41:36 Update CommandInputModel: backspace
+debug 2023/10/29 13:41:36 Update app component: {}
+debug 2023/10/29 13:41:36 Update CommandInputModel: {}
+debug 2023/10/29 13:41:36 Update app component: backspace
+debug 2023/10/29 13:41:36 Update CommandInputModel: backspace
+debug 2023/10/29 13:41:36 Update app component: {}
+debug 2023/10/29 13:41:36 Update CommandInputModel: {}
+debug 2023/10/29 13:41:37 Update app component: backspace
+debug 2023/10/29 13:41:37 Update CommandInputModel: backspace
+debug 2023/10/29 13:41:37 Update app component: {}
+debug 2023/10/29 13:41:37 Update CommandInputModel: {}
+debug 2023/10/29 13:41:37 Update app component: backspace
+debug 2023/10/29 13:41:37 Update CommandInputModel: backspace
+debug 2023/10/29 13:41:37 Update app component: {}
+debug 2023/10/29 13:41:37 Update CommandInputModel: {}
+debug 2023/10/29 13:41:37 Update app component: backspace
+debug 2023/10/29 13:41:37 Update CommandInputModel: backspace
+debug 2023/10/29 13:41:37 Update app component: {}
+debug 2023/10/29 13:41:37 Update CommandInputModel: {}
+debug 2023/10/29 13:41:37 Update app component: backspace
+debug 2023/10/29 13:41:37 Update CommandInputModel: backspace
+debug 2023/10/29 13:41:37 Update app component: {}
+debug 2023/10/29 13:41:37 Update CommandInputModel: {}
+debug 2023/10/29 13:41:38 Update app component: {id:0 tag:16}
+debug 2023/10/29 13:41:38 Update CommandInputModel: {id:0 tag:16}
+debug 2023/10/29 13:41:38 Update app component: backspace
+debug 2023/10/29 13:41:38 Update CommandInputModel: backspace
+debug 2023/10/29 13:41:38 Update app component: {}
+debug 2023/10/29 13:41:38 Update CommandInputModel: {}
+debug 2023/10/29 13:41:38 Update app component: {id:0 tag:18}
+debug 2023/10/29 13:41:38 Update CommandInputModel: {id:0 tag:18}
+debug 2023/10/29 13:41:39 Update app component: {id:0 tag:19}
+debug 2023/10/29 13:41:39 Update CommandInputModel: {id:0 tag:19}
+debug 2023/10/29 13:41:39 Update app component: h
+debug 2023/10/29 13:41:39 Update CommandInputModel: h
+debug 2023/10/29 13:41:39 Update app component: {}
+debug 2023/10/29 13:41:39 Update CommandInputModel: {}
+debug 2023/10/29 13:41:39 Update app component: e
+debug 2023/10/29 13:41:39 Update CommandInputModel: e
+debug 2023/10/29 13:41:39 Update app component: {}
+debug 2023/10/29 13:41:39 Update CommandInputModel: {}
+debug 2023/10/29 13:41:39 Update app component: l
+debug 2023/10/29 13:41:39 Update CommandInputModel: l
+debug 2023/10/29 13:41:39 Update app component: {}
+debug 2023/10/29 13:41:39 Update CommandInputModel: {}
+debug 2023/10/29 13:41:39 Update app component: p
+debug 2023/10/29 13:41:39 Update CommandInputModel: p
+debug 2023/10/29 13:41:39 Update app component: {}
+debug 2023/10/29 13:41:39 Update CommandInputModel: {}
+debug 2023/10/29 13:41:40 Update app component: {id:0 tag:24}
+debug 2023/10/29 13:41:40 Update CommandInputModel: {id:0 tag:24}
+debug 2023/10/29 13:41:40 Update app component: {id:0 tag:25}
+debug 2023/10/29 13:41:40 Update CommandInputModel: {id:0 tag:25}
+debug 2023/10/29 13:41:41 Update app component: {id:0 tag:26}
+debug 2023/10/29 13:41:41 Update CommandInputModel: {id:0 tag:26}
+debug 2023/10/29 13:41:41 Update app component: {id:0 tag:27}
+debug 2023/10/29 13:41:41 Update CommandInputModel: {id:0 tag:27}
+debug 2023/10/29 13:41:42 Update app component: q
+debug 2023/10/29 13:41:42 Update CommandInputModel: q
+debug 2023/10/29 13:41:42 Update app component: {}
+debug 2023/10/29 13:41:42 Update CommandInputModel: {}
+debug 2023/10/29 13:41:42 Update app component: {id:0 tag:29}
+debug 2023/10/29 13:41:42 Update CommandInputModel: {id:0 tag:29}
+debug 2023/10/29 13:41:42 Update app component: backspace
+debug 2023/10/29 13:41:42 Update CommandInputModel: backspace
+debug 2023/10/29 13:41:42 Update app component: {}
+debug 2023/10/29 13:41:42 Update CommandInputModel: {}
+debug 2023/10/29 13:41:43 Update app component: enter
+debug 2023/10/29 13:41:43 Update CommandInputModel: enter
+debug 2023/10/29 13:48:22 Initialize app
+debug 2023/10/29 13:48:22 Update app component: {Width:126 Height:20}
+debug 2023/10/29 13:48:22 Update CommandInputModel: {Width:126 Height:20}
+debug 2023/10/29 13:48:23 Update app component: s
+debug 2023/10/29 13:48:23 Update CommandInputModel: s
+debug 2023/10/29 13:48:23 Update app component: a
+debug 2023/10/29 13:48:23 Update CommandInputModel: a
+debug 2023/10/29 13:48:23 Update app component: {}
+debug 2023/10/29 13:48:23 Update CommandInputModel: {}
+debug 2023/10/29 13:48:23 Update app component: d
+debug 2023/10/29 13:48:23 Update CommandInputModel: d
+debug 2023/10/29 13:48:23 Update app component: {}
+debug 2023/10/29 13:48:23 Update CommandInputModel: {}
+debug 2023/10/29 13:48:23 Update app component: f
+debug 2023/10/29 13:48:23 Update CommandInputModel: f
+debug 2023/10/29 13:48:23 Update app component: {}
+debug 2023/10/29 13:48:23 Update CommandInputModel: {}
+debug 2023/10/29 13:48:23 Update app component: l
+debug 2023/10/29 13:48:23 Update CommandInputModel: l
+debug 2023/10/29 13:48:23 Update app component: {}
+debug 2023/10/29 13:48:23 Update CommandInputModel: {}
+debug 2023/10/29 13:48:23 Update app component: k
+debug 2023/10/29 13:48:23 Update CommandInputModel: k
+debug 2023/10/29 13:48:23 Update app component: {}
+debug 2023/10/29 13:48:23 Update CommandInputModel: {}
+debug 2023/10/29 13:48:23 Update app component: a
+debug 2023/10/29 13:48:23 Update CommandInputModel: a
+debug 2023/10/29 13:48:23 Update app component: {}
+debug 2023/10/29 13:48:23 Update CommandInputModel: {}
+debug 2023/10/29 13:48:23 Update app component: s
+debug 2023/10/29 13:48:23 Update CommandInputModel: s
+debug 2023/10/29 13:48:23 Update app component: {}
+debug 2023/10/29 13:48:23 Update CommandInputModel: {}
+debug 2023/10/29 13:48:24 Update app component: d
+debug 2023/10/29 13:48:24 Update CommandInputModel: d
+debug 2023/10/29 13:48:24 Update app component: {}
+debug 2023/10/29 13:48:24 Update CommandInputModel: {}
+debug 2023/10/29 13:48:24 Update app component: f
+debug 2023/10/29 13:48:24 Update CommandInputModel: f
+debug 2023/10/29 13:48:24 Update app component: {}
+debug 2023/10/29 13:48:24 Update CommandInputModel: {}
+debug 2023/10/29 13:48:24 Update app component: ctrl+c
+debug 2023/10/29 13:50:09 Initialize app
+debug 2023/10/29 13:50:09 Update app component: {Width:126 Height:20}
+debug 2023/10/29 13:50:09 Update CommandInputModel: {Width:126 Height:20}
+debug 2023/10/29 13:50:12 Update app component: a
+debug 2023/10/29 13:50:12 Update CommandInputModel: a
+debug 2023/10/29 13:50:13 Update app component: d
+debug 2023/10/29 13:50:13 Update CommandInputModel: d
+debug 2023/10/29 13:50:13 Update app component: {}
+debug 2023/10/29 13:50:13 Update CommandInputModel: {}
+debug 2023/10/29 13:50:13 Update app component: f
+debug 2023/10/29 13:50:13 Update CommandInputModel: f
+debug 2023/10/29 13:50:13 Update app component: {}
+debug 2023/10/29 13:50:13 Update CommandInputModel: {}
+debug 2023/10/29 13:50:13 Update app component: a
+debug 2023/10/29 13:50:13 Update CommandInputModel: a
+debug 2023/10/29 13:50:13 Update app component: {}
+debug 2023/10/29 13:50:13 Update CommandInputModel: {}
+debug 2023/10/29 13:50:13 Update app component: d
+debug 2023/10/29 13:50:13 Update CommandInputModel: d
+debug 2023/10/29 13:50:13 Update app component: {}
+debug 2023/10/29 13:50:13 Update CommandInputModel: {}
+debug 2023/10/29 13:50:13 Update app component: f
+debug 2023/10/29 13:50:13 Update CommandInputModel: f
+debug 2023/10/29 13:50:13 Update app component: {}
+debug 2023/10/29 13:50:13 Update CommandInputModel: {}
+debug 2023/10/29 13:50:13 Update app component: l
+debug 2023/10/29 13:50:13 Update CommandInputModel: l
+debug 2023/10/29 13:50:13 Update app component: {}
+debug 2023/10/29 13:50:13 Update CommandInputModel: {}
+debug 2023/10/29 13:50:13 Update app component: enter
+debug 2023/10/29 13:50:13 Update CommandInputModel: enter
+debug 2023/10/29 16:59:37 Initialize app
+debug 2023/10/29 16:59:37 Update app component: {Width:126 Height:20}
+debug 2023/10/29 16:59:37 Update CommandInputModel: {Width:126 Height:20}
+debug 2023/10/29 16:59:39 Update app component: ctrl+c
+debug 2023/10/29 16:59:58 Initialize app
+debug 2023/10/29 16:59:58 Update app component: {Width:126 Height:20}
+debug 2023/10/29 16:59:58 Update CommandInputModel: {Width:126 Height:20}
+debug 2023/10/29 17:00:01 Update app component: ctrl+c
+debug 2023/10/29 17:00:10 Initialize app
+debug 2023/10/29 17:00:10 Update app component: {Width:126 Height:20}
+debug 2023/10/29 17:00:10 Update CommandInputModel: {Width:126 Height:20}
+debug 2023/10/29 17:00:13 Update app component: ctrl+c
+debug 2023/10/29 17:00:27 Initialize app
+debug 2023/10/29 17:00:27 Update app component: {Width:126 Height:20}
+debug 2023/10/29 17:00:27 Update CommandInputModel: {Width:126 Height:20}
+debug 2023/10/29 17:00:30 Update app component: ctrl+c
+debug 2023/10/29 17:01:11 Initialize app
+debug 2023/10/29 17:01:11 Update app component: {Width:126 Height:20}
+debug 2023/10/29 17:01:11 Update CommandInputModel: {Width:126 Height:20}
+debug 2023/10/29 17:01:11 Update app component: q
+debug 2023/10/29 17:01:11 Update CommandInputModel: q
+debug 2023/10/29 17:01:12 Update app component: ctrl+c
+debug 2023/10/29 17:01:32 Initialize app
+debug 2023/10/29 17:01:32 Update app component: {Width:126 Height:20}
+debug 2023/10/29 17:01:32 Update CommandInputModel: {Width:126 Height:20}
+debug 2023/10/29 17:01:41 Update app component: up
+debug 2023/10/29 17:01:41 Update CommandInputModel: up
+debug 2023/10/29 17:01:42 Update app component: ctrl+c
+debug 2023/10/29 17:01:44 Initialize app
+debug 2023/10/29 17:01:44 Update app component: {Width:126 Height:20}
+debug 2023/10/29 17:01:44 Update CommandInputModel: {Width:126 Height:20}
+debug 2023/10/29 17:01:45 Update app component: a
+debug 2023/10/29 17:01:45 Update CommandInputModel: a
+debug 2023/10/29 17:01:45 Update app component: s
+debug 2023/10/29 17:01:45 Update CommandInputModel: s
+debug 2023/10/29 17:01:45 Update app component: {}
+debug 2023/10/29 17:01:45 Update CommandInputModel: {}
+debug 2023/10/29 17:01:45 Update app component: d
+debug 2023/10/29 17:01:45 Update CommandInputModel: d
+debug 2023/10/29 17:01:45 Update app component: {}
+debug 2023/10/29 17:01:45 Update CommandInputModel: {}
+debug 2023/10/29 17:01:45 Update app component: k
+debug 2023/10/29 17:01:45 Update CommandInputModel: k
+debug 2023/10/29 17:01:45 Update app component: {}
+debug 2023/10/29 17:01:45 Update CommandInputModel: {}
+debug 2023/10/29 17:01:45 Update app component: a
+debug 2023/10/29 17:01:45 Update CommandInputModel: a
+debug 2023/10/29 17:01:45 Update app component: {}
+debug 2023/10/29 17:01:45 Update CommandInputModel: {}
+debug 2023/10/29 17:01:45 Update app component: s
+debug 2023/10/29 17:01:45 Update CommandInputModel: s
+debug 2023/10/29 17:01:45 Update app component: {}
+debug 2023/10/29 17:01:45 Update CommandInputModel: {}
+debug 2023/10/29 17:01:45 Update app component: l
+debug 2023/10/29 17:01:45 Update CommandInputModel: l
+debug 2023/10/29 17:01:45 Update app component: {}
+debug 2023/10/29 17:01:45 Update CommandInputModel: {}
+debug 2023/10/29 17:01:45 Update app component: d
+debug 2023/10/29 17:01:45 Update CommandInputModel: d
+debug 2023/10/29 17:01:45 Update app component: {}
+debug 2023/10/29 17:01:45 Update CommandInputModel: {}
+debug 2023/10/29 17:01:45 Update app component: f
+debug 2023/10/29 17:01:45 Update CommandInputModel: f
+debug 2023/10/29 17:01:45 Update app component: {}
+debug 2023/10/29 17:01:45 Update CommandInputModel: {}
+debug 2023/10/29 17:01:45 Update app component: backspace
+debug 2023/10/29 17:01:45 Update CommandInputModel: backspace
+debug 2023/10/29 17:01:45 Update app component: {}
+debug 2023/10/29 17:01:45 Update CommandInputModel: {}
+debug 2023/10/29 17:01:46 Update app component: backspace
+debug 2023/10/29 17:01:46 Update CommandInputModel: backspace
+debug 2023/10/29 17:01:46 Update app component: {}
+debug 2023/10/29 17:01:46 Update CommandInputModel: {}
+debug 2023/10/29 17:01:46 Update app component: backspace
+debug 2023/10/29 17:01:46 Update CommandInputModel: backspace
+debug 2023/10/29 17:01:46 Update app component: {}
+debug 2023/10/29 17:01:46 Update CommandInputModel: {}
+debug 2023/10/29 17:01:46 Update app component: {id:0 tag:13}
+debug 2023/10/29 17:01:46 Update CommandInputModel: {id:0 tag:13}
+debug 2023/10/29 17:01:46 Update app component: backspace
+debug 2023/10/29 17:01:46 Update CommandInputModel: backspace
+debug 2023/10/29 17:01:46 Update app component: {}
+debug 2023/10/29 17:01:46 Update CommandInputModel: {}
+debug 2023/10/29 17:01:47 Update app component: backspace
+debug 2023/10/29 17:01:47 Update CommandInputModel: backspace
+debug 2023/10/29 17:01:47 Update app component: {}
+debug 2023/10/29 17:01:47 Update CommandInputModel: {}
+debug 2023/10/29 17:01:47 Update app component: backspace
+debug 2023/10/29 17:01:47 Update CommandInputModel: backspace
+debug 2023/10/29 17:01:47 Update app component: {}
+debug 2023/10/29 17:01:47 Update CommandInputModel: {}
+debug 2023/10/29 17:01:47 Update app component: backspace
+debug 2023/10/29 17:01:47 Update CommandInputModel: backspace
+debug 2023/10/29 17:01:47 Update app component: {}
+debug 2023/10/29 17:01:47 Update CommandInputModel: {}
+debug 2023/10/29 17:01:47 Update app component: backspace
+debug 2023/10/29 17:01:47 Update CommandInputModel: backspace
+debug 2023/10/29 17:01:47 Update app component: {}
+debug 2023/10/29 17:01:47 Update CommandInputModel: {}
+debug 2023/10/29 17:01:47 Update app component: backspace
+debug 2023/10/29 17:01:47 Update CommandInputModel: backspace
+debug 2023/10/29 17:01:47 Update app component: {}
+debug 2023/10/29 17:01:47 Update CommandInputModel: {}
+debug 2023/10/29 17:01:47 Update app component: backspace
+debug 2023/10/29 17:01:47 Update CommandInputModel: backspace
+debug 2023/10/29 17:01:47 Update app component: backspace
+debug 2023/10/29 17:01:47 Update CommandInputModel: backspace
+debug 2023/10/29 17:01:47 Update app component: backspace
+debug 2023/10/29 17:01:47 Update CommandInputModel: backspace
+debug 2023/10/29 17:01:47 Update app component: {id:0 tag:20}
+debug 2023/10/29 17:01:47 Update CommandInputModel: {id:0 tag:20}
+debug 2023/10/29 17:01:48 Update app component: {id:0 tag:21}
+debug 2023/10/29 17:01:48 Update CommandInputModel: {id:0 tag:21}
+debug 2023/10/29 17:01:48 Update app component: {id:0 tag:22}
+debug 2023/10/29 17:01:48 Update CommandInputModel: {id:0 tag:22}
+debug 2023/10/29 17:01:49 Update app component: {id:0 tag:23}
+debug 2023/10/29 17:01:49 Update CommandInputModel: {id:0 tag:23}
+debug 2023/10/29 17:01:49 Update app component: c
+debug 2023/10/29 17:01:49 Update CommandInputModel: c
+debug 2023/10/29 17:01:49 Update app component: {}
+debug 2023/10/29 17:01:49 Update CommandInputModel: {}
+debug 2023/10/29 17:01:49 Update app component: l
+debug 2023/10/29 17:01:49 Update CommandInputModel: l
+debug 2023/10/29 17:01:49 Update app component: {}
+debug 2023/10/29 17:01:49 Update CommandInputModel: {}
+debug 2023/10/29 17:01:49 Update app component: e
+debug 2023/10/29 17:01:49 Update CommandInputModel: e
+debug 2023/10/29 17:01:49 Update app component: {}
+debug 2023/10/29 17:01:49 Update CommandInputModel: {}
+debug 2023/10/29 17:01:49 Update app component: a
+debug 2023/10/29 17:01:49 Update CommandInputModel: a
+debug 2023/10/29 17:01:49 Update app component: {}
+debug 2023/10/29 17:01:49 Update CommandInputModel: {}
+debug 2023/10/29 17:01:49 Update app component: r
+debug 2023/10/29 17:01:49 Update CommandInputModel: r
+debug 2023/10/29 17:01:49 Update app component: {}
+debug 2023/10/29 17:01:49 Update CommandInputModel: {}
+debug 2023/10/29 17:01:50 Update app component: enter
+debug 2023/10/29 17:01:50 Update CommandInputModel: enter
+debug 2023/10/29 17:03:29 Initialize app
+debug 2023/10/29 17:03:29 Update app component: tea.WindowSizeMsg {Width:126 Height:20}
+debug 2023/10/29 17:03:29 Update CommandInputModel: {Width:126 Height:20}
+debug 2023/10/29 17:03:32 Update app component: tea.KeyMsg a
+debug 2023/10/29 17:03:32 Update CommandInputModel: a
+debug 2023/10/29 17:03:32 Update app component: cursor.BlinkMsg {id:0 tag:2}
+debug 2023/10/29 17:03:32 Update CommandInputModel: {id:0 tag:2}
+debug 2023/10/29 17:03:33 Update app component: cursor.BlinkMsg {id:0 tag:3}
+debug 2023/10/29 17:03:33 Update CommandInputModel: {id:0 tag:3}
+debug 2023/10/29 17:03:34 Update app component: cursor.BlinkMsg {id:0 tag:4}
+debug 2023/10/29 17:03:34 Update CommandInputModel: {id:0 tag:4}
+debug 2023/10/29 17:03:34 Update app component: tea.KeyMsg backspace
+debug 2023/10/29 17:03:34 Update CommandInputModel: backspace
+debug 2023/10/29 17:03:34 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 17:03:34 Update CommandInputModel: {}
+debug 2023/10/29 17:03:34 Update app component: tea.KeyMsg backspace
+debug 2023/10/29 17:03:34 Update CommandInputModel: backspace
+debug 2023/10/29 17:03:34 Update app component: cursor.BlinkMsg {id:0 tag:6}
+debug 2023/10/29 17:03:34 Update CommandInputModel: {id:0 tag:6}
+debug 2023/10/29 17:03:35 Update app component: cursor.BlinkMsg {id:0 tag:7}
+debug 2023/10/29 17:03:35 Update CommandInputModel: {id:0 tag:7}
+debug 2023/10/29 17:03:36 Update app component: cursor.BlinkMsg {id:0 tag:8}
+debug 2023/10/29 17:03:36 Update CommandInputModel: {id:0 tag:8}
+debug 2023/10/29 17:03:36 Update app component: cursor.BlinkMsg {id:0 tag:9}
+debug 2023/10/29 17:03:36 Update CommandInputModel: {id:0 tag:9}
+debug 2023/10/29 17:03:37 Update app component: cursor.BlinkMsg {id:0 tag:10}
+debug 2023/10/29 17:03:37 Update CommandInputModel: {id:0 tag:10}
+debug 2023/10/29 17:03:37 Update app component: cursor.BlinkMsg {id:0 tag:11}
+debug 2023/10/29 17:03:37 Update CommandInputModel: {id:0 tag:11}
+debug 2023/10/29 17:03:38 Update app component: cursor.BlinkMsg {id:0 tag:12}
+debug 2023/10/29 17:03:38 Update CommandInputModel: {id:0 tag:12}
+debug 2023/10/29 17:03:38 Update app component: cursor.BlinkMsg {id:0 tag:13}
+debug 2023/10/29 17:03:38 Update CommandInputModel: {id:0 tag:13}
+debug 2023/10/29 17:03:39 Update app component: cursor.BlinkMsg {id:0 tag:14}
+debug 2023/10/29 17:03:39 Update CommandInputModel: {id:0 tag:14}
+debug 2023/10/29 17:03:39 Update app component: cursor.BlinkMsg {id:0 tag:15}
+debug 2023/10/29 17:03:39 Update CommandInputModel: {id:0 tag:15}
+debug 2023/10/29 17:03:40 Update app component: cursor.BlinkMsg {id:0 tag:16}
+debug 2023/10/29 17:03:40 Update CommandInputModel: {id:0 tag:16}
+debug 2023/10/29 17:03:40 Update app component: cursor.BlinkMsg {id:0 tag:17}
+debug 2023/10/29 17:03:40 Update CommandInputModel: {id:0 tag:17}
+debug 2023/10/29 17:03:41 Update app component: cursor.BlinkMsg {id:0 tag:18}
+debug 2023/10/29 17:03:41 Update CommandInputModel: {id:0 tag:18}
+debug 2023/10/29 17:03:41 Update app component: cursor.BlinkMsg {id:0 tag:19}
+debug 2023/10/29 17:03:41 Update CommandInputModel: {id:0 tag:19}
+debug 2023/10/29 17:03:42 Update app component: tea.KeyMsg c
+debug 2023/10/29 17:03:42 Update CommandInputModel: c
+debug 2023/10/29 17:03:42 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 17:03:42 Update CommandInputModel: {}
+debug 2023/10/29 17:03:42 Update app component: tea.KeyMsg l
+debug 2023/10/29 17:03:42 Update CommandInputModel: l
+debug 2023/10/29 17:03:42 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 17:03:42 Update CommandInputModel: {}
+debug 2023/10/29 17:03:42 Update app component: tea.KeyMsg e
+debug 2023/10/29 17:03:42 Update CommandInputModel: e
+debug 2023/10/29 17:03:42 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 17:03:42 Update CommandInputModel: {}
+debug 2023/10/29 17:03:42 Update app component: tea.KeyMsg a
+debug 2023/10/29 17:03:42 Update CommandInputModel: a
+debug 2023/10/29 17:03:42 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 17:03:42 Update CommandInputModel: {}
+debug 2023/10/29 17:03:42 Update app component: tea.KeyMsg r
+debug 2023/10/29 17:03:42 Update CommandInputModel: r
+debug 2023/10/29 17:03:42 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 17:03:42 Update CommandInputModel: {}
+debug 2023/10/29 17:03:42 Update app component: tea.KeyMsg backspace
+debug 2023/10/29 17:03:42 Update CommandInputModel: backspace
+debug 2023/10/29 17:03:42 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 17:03:42 Update CommandInputModel: {}
+debug 2023/10/29 17:03:42 Update app component: tea.KeyMsg backspace
+debug 2023/10/29 17:03:42 Update CommandInputModel: backspace
+debug 2023/10/29 17:03:42 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 17:03:42 Update CommandInputModel: {}
+debug 2023/10/29 17:03:43 Update app component: tea.KeyMsg backspace
+debug 2023/10/29 17:03:43 Update CommandInputModel: backspace
+debug 2023/10/29 17:03:43 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 17:03:43 Update CommandInputModel: {}
+debug 2023/10/29 17:03:43 Update app component: tea.KeyMsg backspace
+debug 2023/10/29 17:03:43 Update CommandInputModel: backspace
+debug 2023/10/29 17:03:43 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 17:03:43 Update CommandInputModel: {}
+debug 2023/10/29 17:03:43 Update app component: tea.KeyMsg backspace
+debug 2023/10/29 17:03:43 Update CommandInputModel: backspace
+debug 2023/10/29 17:03:43 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 17:03:43 Update CommandInputModel: {}
+debug 2023/10/29 17:03:44 Update app component: tea.KeyMsg enter
+debug 2023/10/29 17:03:44 Update CommandInputModel: enter
+debug 2023/10/29 20:44:39 Initialize app
+debug 2023/10/29 20:44:39 Update app component: tea.WindowSizeMsg {Width:126 Height:20}
+debug 2023/10/29 20:44:39 Update CommandInputModel: {Width:126 Height:20}
+debug 2023/10/29 20:44:42 Update app component: tea.KeyMsg h
+debug 2023/10/29 20:44:42 Update CommandInputModel: h
+debug 2023/10/29 20:44:42 Update app component: tea.KeyMsg e
+debug 2023/10/29 20:44:42 Update CommandInputModel: e
+debug 2023/10/29 20:44:42 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 20:44:42 Update CommandInputModel: {}
+debug 2023/10/29 20:44:42 Update app component: tea.KeyMsg l
+debug 2023/10/29 20:44:42 Update CommandInputModel: l
+debug 2023/10/29 20:44:42 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 20:44:42 Update CommandInputModel: {}
+debug 2023/10/29 20:44:42 Update app component: tea.KeyMsg l
+debug 2023/10/29 20:44:42 Update CommandInputModel: l
+debug 2023/10/29 20:44:42 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 20:44:42 Update CommandInputModel: {}
+debug 2023/10/29 20:44:43 Update app component: tea.KeyMsg o
+debug 2023/10/29 20:44:43 Update CommandInputModel: o
+debug 2023/10/29 20:44:43 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 20:44:43 Update CommandInputModel: {}
+debug 2023/10/29 20:44:43 Update app component: cursor.BlinkMsg {id:0 tag:6}
+debug 2023/10/29 20:44:43 Update CommandInputModel: {id:0 tag:6}
+debug 2023/10/29 20:44:43 Update app component: tea.KeyMsg enter
+debug 2023/10/29 20:44:43 Update CommandInputModel: enter
+debug 2023/10/29 21:03:39 Initialize app
+debug 2023/10/29 21:03:39 Update app component: tea.WindowSizeMsg {Width:126 Height:20}
+debug 2023/10/29 21:03:39 Update CommandInputModel: {Width:126 Height:20}
+debug 2023/10/29 21:03:40 Update app component: tea.KeyMsg a
+debug 2023/10/29 21:03:40 Update CommandInputModel: a
+debug 2023/10/29 21:03:41 Update app component: cursor.BlinkMsg {id:0 tag:2}
+debug 2023/10/29 21:03:41 Update CommandInputModel: {id:0 tag:2}
+debug 2023/10/29 21:03:41 Update app component: tea.KeyMsg a
+debug 2023/10/29 21:03:41 Update CommandInputModel: a
+debug 2023/10/29 21:03:41 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 21:03:41 Update CommandInputModel: {}
+debug 2023/10/29 21:03:41 Update app component: tea.KeyMsg s
+debug 2023/10/29 21:03:41 Update CommandInputModel: s
+debug 2023/10/29 21:03:41 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 21:03:41 Update CommandInputModel: {}
+debug 2023/10/29 21:03:41 Update app component: tea.KeyMsg l
+debug 2023/10/29 21:03:41 Update CommandInputModel: l
+debug 2023/10/29 21:03:41 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 21:03:41 Update CommandInputModel: {}
+debug 2023/10/29 21:03:41 Update app component: tea.KeyMsg f
+debug 2023/10/29 21:03:41 Update CommandInputModel: f
+debug 2023/10/29 21:03:41 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 21:03:41 Update CommandInputModel: {}
+debug 2023/10/29 21:03:41 Update app component: tea.KeyMsg s
+debug 2023/10/29 21:03:41 Update CommandInputModel: s
+debug 2023/10/29 21:03:41 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 21:03:41 Update CommandInputModel: {}
+debug 2023/10/29 21:03:41 Update app component: tea.KeyMsg d
+debug 2023/10/29 21:03:41 Update CommandInputModel: d
+debug 2023/10/29 21:03:41 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 21:03:41 Update CommandInputModel: {}
+debug 2023/10/29 21:03:42 Update app component: cursor.BlinkMsg {id:0 tag:9}
+debug 2023/10/29 21:03:42 Update CommandInputModel: {id:0 tag:9}
+debug 2023/10/29 21:03:43 Update app component: tea.KeyMsg enter
+debug 2023/10/29 21:03:43 Update CommandInputModel: enter
+debug 2023/10/29 21:03:43 CommandInputModel got submit: aaslfsd
+debug 2023/10/29 21:03:43 Update app component: models.InputSubmitMsg {Input:aaslfsd}
+debug 2023/10/29 21:03:43 Update CommandInputModel: {Input:aaslfsd}
+debug 2023/10/29 21:03:43 Update app component: cursor.BlinkMsg {id:0 tag:10}
+debug 2023/10/29 21:03:43 Update CommandInputModel: {id:0 tag:10}
+debug 2023/10/29 21:03:43 Update app component: cursor.BlinkMsg {id:0 tag:11}
+debug 2023/10/29 21:03:43 Update CommandInputModel: {id:0 tag:11}
+debug 2023/10/29 21:03:44 Update app component: cursor.BlinkMsg {id:0 tag:12}
+debug 2023/10/29 21:03:44 Update CommandInputModel: {id:0 tag:12}
+debug 2023/10/29 21:03:44 Update app component: cursor.BlinkMsg {id:0 tag:13}
+debug 2023/10/29 21:03:44 Update CommandInputModel: {id:0 tag:13}
+debug 2023/10/29 21:03:45 Update app component: cursor.BlinkMsg {id:0 tag:14}
+debug 2023/10/29 21:03:45 Update CommandInputModel: {id:0 tag:14}
+debug 2023/10/29 21:03:45 Update app component: cursor.BlinkMsg {id:0 tag:15}
+debug 2023/10/29 21:03:45 Update CommandInputModel: {id:0 tag:15}
+debug 2023/10/29 21:03:46 Update app component: cursor.BlinkMsg {id:0 tag:16}
+debug 2023/10/29 21:03:46 Update CommandInputModel: {id:0 tag:16}
+debug 2023/10/29 21:03:46 Update app component: cursor.BlinkMsg {id:0 tag:17}
+debug 2023/10/29 21:03:46 Update CommandInputModel: {id:0 tag:17}
+debug 2023/10/29 21:03:47 Update app component: tea.KeyMsg enter
+debug 2023/10/29 21:03:47 Update CommandInputModel: enter
+debug 2023/10/29 21:03:47 CommandInputModel got submit: aaslfsd
+debug 2023/10/29 21:03:47 Update app component: models.InputSubmitMsg {Input:aaslfsd}
+debug 2023/10/29 21:03:47 Update CommandInputModel: {Input:aaslfsd}
+debug 2023/10/29 21:03:47 Update app component: cursor.BlinkMsg {id:0 tag:18}
+debug 2023/10/29 21:03:47 Update CommandInputModel: {id:0 tag:18}
+debug 2023/10/29 21:03:47 Update app component: tea.KeyMsg ctrl+c
+debug 2023/10/29 21:05:41 Initialize app
+debug 2023/10/29 21:05:41 Update app component: tea.WindowSizeMsg {Width:126 Height:20}
+debug 2023/10/29 21:05:41 Update CommandInputModel: {Width:126 Height:20}
+debug 2023/10/29 21:05:42 Update app component: tea.KeyMsg a
+debug 2023/10/29 21:05:42 Update CommandInputModel: a
+debug 2023/10/29 21:05:42 Update app component: tea.KeyMsg s
+debug 2023/10/29 21:05:42 Update CommandInputModel: s
+debug 2023/10/29 21:05:42 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 21:05:42 Update CommandInputModel: {}
+debug 2023/10/29 21:05:42 Update app component: tea.KeyMsg d
+debug 2023/10/29 21:05:42 Update CommandInputModel: d
+debug 2023/10/29 21:05:42 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 21:05:42 Update CommandInputModel: {}
+debug 2023/10/29 21:05:42 Update app component: tea.KeyMsg f
+debug 2023/10/29 21:05:42 Update CommandInputModel: f
+debug 2023/10/29 21:05:42 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 21:05:42 Update CommandInputModel: {}
+debug 2023/10/29 21:05:42 Update app component: tea.KeyMsg a
+debug 2023/10/29 21:05:42 Update CommandInputModel: a
+debug 2023/10/29 21:05:42 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 21:05:42 Update CommandInputModel: {}
+debug 2023/10/29 21:05:43 Update app component: tea.KeyMsg s
+debug 2023/10/29 21:05:43 Update CommandInputModel: s
+debug 2023/10/29 21:05:43 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 21:05:43 Update CommandInputModel: {}
+debug 2023/10/29 21:05:43 Update app component: tea.KeyMsg d
+debug 2023/10/29 21:05:43 Update CommandInputModel: d
+debug 2023/10/29 21:05:43 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 21:05:43 Update CommandInputModel: {}
+debug 2023/10/29 21:05:43 Update app component: tea.KeyMsg f
+debug 2023/10/29 21:05:43 Update CommandInputModel: f
+debug 2023/10/29 21:05:43 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 21:05:43 Update CommandInputModel: {}
+debug 2023/10/29 21:05:43 Update app component: tea.KeyMsg enter
+debug 2023/10/29 21:05:43 Update CommandInputModel: enter
+debug 2023/10/29 21:05:43 Update app component: models.InputSubmitMsg {Input:asdfasdf}
+debug 2023/10/29 21:05:43 Update CommandInputModel: {Input:asdfasdf}
+debug 2023/10/29 21:05:43 TerminalLog got input subbmit message {Input:asdfasdf}
+debug 2023/10/29 21:05:43 Update app component: cursor.BlinkMsg {id:0 tag:9}
+debug 2023/10/29 21:05:43 Update CommandInputModel: {id:0 tag:9}
+debug 2023/10/29 21:05:44 Update app component: cursor.BlinkMsg {id:0 tag:10}
+debug 2023/10/29 21:05:44 Update CommandInputModel: {id:0 tag:10}
+debug 2023/10/29 21:05:44 Update app component: tea.KeyMsg ctrl+c
+debug 2023/10/29 21:07:04 Initialize app
+debug 2023/10/29 21:07:04 Update app component: tea.WindowSizeMsg {Width:126 Height:20}
+debug 2023/10/29 21:07:04 Update CommandInputModel: {Width:126 Height:20}
+debug 2023/10/29 21:07:06 Update app component: tea.KeyMsg h
+debug 2023/10/29 21:07:06 Update CommandInputModel: h
+debug 2023/10/29 21:07:06 Update app component: tea.KeyMsg e
+debug 2023/10/29 21:07:07 Update CommandInputModel: e
+debug 2023/10/29 21:07:07 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 21:07:07 Update CommandInputModel: {}
+debug 2023/10/29 21:07:07 Update app component: tea.KeyMsg l
+debug 2023/10/29 21:07:07 Update CommandInputModel: l
+debug 2023/10/29 21:07:07 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 21:07:07 Update CommandInputModel: {}
+debug 2023/10/29 21:07:07 Update app component: tea.KeyMsg l
+debug 2023/10/29 21:07:07 Update CommandInputModel: l
+debug 2023/10/29 21:07:07 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 21:07:07 Update CommandInputModel: {}
+debug 2023/10/29 21:07:07 Update app component: tea.KeyMsg o
+debug 2023/10/29 21:07:07 Update CommandInputModel: o
+debug 2023/10/29 21:07:07 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 21:07:07 Update CommandInputModel: {}
+debug 2023/10/29 21:07:08 Update app component: cursor.BlinkMsg {id:0 tag:6}
+debug 2023/10/29 21:07:08 Update CommandInputModel: {id:0 tag:6}
+debug 2023/10/29 21:07:08 Update app component: tea.KeyMsg enter
+debug 2023/10/29 21:07:08 Update CommandInputModel: enter
+debug 2023/10/29 21:07:08 Update app component: models.InputSubmitMsg {Input:hello}
+debug 2023/10/29 21:07:08 Update CommandInputModel: {Input:hello}
+debug 2023/10/29 21:07:08 TerminalLog got input submit message {Input:hello}
+debug 2023/10/29 21:07:08 Update app component: cursor.BlinkMsg {id:0 tag:7}
+debug 2023/10/29 21:07:08 Update CommandInputModel: {id:0 tag:7}
+debug 2023/10/29 21:07:09 Update app component: cursor.BlinkMsg {id:0 tag:8}
+debug 2023/10/29 21:07:09 Update CommandInputModel: {id:0 tag:8}
+debug 2023/10/29 21:07:09 Update app component: cursor.BlinkMsg {id:0 tag:9}
+debug 2023/10/29 21:07:09 Update CommandInputModel: {id:0 tag:9}
+debug 2023/10/29 21:07:09 Update app component: tea.KeyMsg backspace
+debug 2023/10/29 21:07:09 Update CommandInputModel: backspace
+debug 2023/10/29 21:07:09 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 21:07:09 Update CommandInputModel: {}
+debug 2023/10/29 21:07:10 Update app component: tea.KeyMsg backspace
+debug 2023/10/29 21:07:10 Update CommandInputModel: backspace
+debug 2023/10/29 21:07:10 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 21:07:10 Update CommandInputModel: {}
+debug 2023/10/29 21:07:10 Update app component: tea.KeyMsg backspace
+debug 2023/10/29 21:07:10 Update CommandInputModel: backspace
+debug 2023/10/29 21:07:10 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 21:07:10 Update CommandInputModel: {}
+debug 2023/10/29 21:07:10 Update app component: tea.KeyMsg backspace
+debug 2023/10/29 21:07:10 Update CommandInputModel: backspace
+debug 2023/10/29 21:07:10 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 21:07:10 Update CommandInputModel: {}
+debug 2023/10/29 21:07:10 Update app component: tea.KeyMsg backspace
+debug 2023/10/29 21:07:10 Update CommandInputModel: backspace
+debug 2023/10/29 21:07:10 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 21:07:10 Update CommandInputModel: {}
+debug 2023/10/29 21:07:11 Update app component: cursor.BlinkMsg {id:0 tag:15}
+debug 2023/10/29 21:07:11 Update CommandInputModel: {id:0 tag:15}
+debug 2023/10/29 21:07:11 Update app component: tea.KeyMsg a
+debug 2023/10/29 21:07:11 Update CommandInputModel: a
+debug 2023/10/29 21:07:11 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 21:07:11 Update CommandInputModel: {}
+debug 2023/10/29 21:07:11 Update app component: tea.KeyMsg g
+debug 2023/10/29 21:07:11 Update CommandInputModel: g
+debug 2023/10/29 21:07:11 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 21:07:11 Update CommandInputModel: {}
+debug 2023/10/29 21:07:11 Update app component: tea.KeyMsg a
+debug 2023/10/29 21:07:11 Update CommandInputModel: a
+debug 2023/10/29 21:07:11 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 21:07:11 Update CommandInputModel: {}
+debug 2023/10/29 21:07:12 Update app component: tea.KeyMsg i
+debug 2023/10/29 21:07:12 Update CommandInputModel: i
+debug 2023/10/29 21:07:12 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 21:07:12 Update CommandInputModel: {}
+debug 2023/10/29 21:07:12 Update app component: tea.KeyMsg n
+debug 2023/10/29 21:07:12 Update CommandInputModel: n
+debug 2023/10/29 21:07:12 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 21:07:12 Update CommandInputModel: {}
+debug 2023/10/29 21:07:12 Update app component: tea.KeyMsg enter
+debug 2023/10/29 21:07:12 Update CommandInputModel: enter
+debug 2023/10/29 21:07:12 Update app component: models.InputSubmitMsg {Input:again}
+debug 2023/10/29 21:07:12 Update CommandInputModel: {Input:again}
+debug 2023/10/29 21:07:12 TerminalLog got input submit message {Input:again}
+debug 2023/10/29 21:07:12 Update app component: cursor.BlinkMsg {id:0 tag:21}
+debug 2023/10/29 21:07:12 Update CommandInputModel: {id:0 tag:21}
+debug 2023/10/29 21:07:13 Update app component: tea.KeyMsg c
+debug 2023/10/29 21:07:13 Update CommandInputModel: c
+debug 2023/10/29 21:07:13 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 21:07:13 Update CommandInputModel: {}
+debug 2023/10/29 21:07:13 Update app component: tea.KeyMsg backspace
+debug 2023/10/29 21:07:13 Update CommandInputModel: backspace
+debug 2023/10/29 21:07:13 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 21:07:13 Update CommandInputModel: {}
+debug 2023/10/29 21:07:13 Update app component: tea.KeyMsg backspace
+debug 2023/10/29 21:07:13 Update CommandInputModel: backspace
+debug 2023/10/29 21:07:13 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 21:07:13 Update CommandInputModel: {}
+debug 2023/10/29 21:07:14 Update app component: tea.KeyMsg backspace
+debug 2023/10/29 21:07:14 Update CommandInputModel: backspace
+debug 2023/10/29 21:07:14 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 21:07:14 Update CommandInputModel: {}
+debug 2023/10/29 21:07:14 Update app component: tea.KeyMsg backspace
+debug 2023/10/29 21:07:14 Update CommandInputModel: backspace
+debug 2023/10/29 21:07:14 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 21:07:14 Update CommandInputModel: {}
+debug 2023/10/29 21:07:14 Update app component: tea.KeyMsg backspace
+debug 2023/10/29 21:07:14 Update CommandInputModel: backspace
+debug 2023/10/29 21:07:14 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 21:07:14 Update CommandInputModel: {}
+debug 2023/10/29 21:07:14 Update app component: tea.KeyMsg backspace
+debug 2023/10/29 21:07:14 Update CommandInputModel: backspace
+debug 2023/10/29 21:07:14 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 21:07:14 Update CommandInputModel: {}
+debug 2023/10/29 21:07:14 Update app component: tea.KeyMsg backspace
+debug 2023/10/29 21:07:14 Update CommandInputModel: backspace
+debug 2023/10/29 21:07:15 Update app component: cursor.BlinkMsg {id:0 tag:29}
+debug 2023/10/29 21:07:15 Update CommandInputModel: {id:0 tag:29}
+debug 2023/10/29 21:07:15 Update app component: tea.KeyMsg c
+debug 2023/10/29 21:07:15 Update CommandInputModel: c
+debug 2023/10/29 21:07:15 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 21:07:15 Update CommandInputModel: {}
+debug 2023/10/29 21:07:15 Update app component: tea.KeyMsg l
+debug 2023/10/29 21:07:15 Update CommandInputModel: l
+debug 2023/10/29 21:07:15 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 21:07:15 Update CommandInputModel: {}
+debug 2023/10/29 21:07:15 Update app component: tea.KeyMsg e
+debug 2023/10/29 21:07:15 Update CommandInputModel: e
+debug 2023/10/29 21:07:15 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 21:07:15 Update CommandInputModel: {}
+debug 2023/10/29 21:07:15 Update app component: tea.KeyMsg a
+debug 2023/10/29 21:07:15 Update CommandInputModel: a
+debug 2023/10/29 21:07:15 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 21:07:15 Update CommandInputModel: {}
+debug 2023/10/29 21:07:15 Update app component: tea.KeyMsg r
+debug 2023/10/29 21:07:15 Update CommandInputModel: r
+debug 2023/10/29 21:07:15 Update app component: cursor.blinkCanceled {}
+debug 2023/10/29 21:07:15 Update CommandInputModel: {}
+debug 2023/10/29 21:07:16 Update app component: tea.KeyMsg enter
+debug 2023/10/29 21:07:16 Update CommandInputModel: enter
+debug 2023/10/29 21:07:16 Update app component: models.InputSubmitMsg {Input:clear}
+debug 2023/10/29 21:07:16 Update CommandInputModel: {Input:clear}
+debug 2023/10/29 21:07:16 TerminalLog got input submit message {Input:clear}
+debug 2023/10/29 21:07:16 Update app component: cursor.BlinkMsg {id:0 tag:35}
+debug 2023/10/29 21:07:16 Update CommandInputModel: {id:0 tag:35}
+debug 2023/10/29 21:07:16 Update app component: cursor.BlinkMsg {id:0 tag:36}
+debug 2023/10/29 21:07:16 Update CommandInputModel: {id:0 tag:36}
+debug 2023/10/29 21:07:17 Update app component: cursor.BlinkMsg {id:0 tag:37}
+debug 2023/10/29 21:07:17 Update CommandInputModel: {id:0 tag:37}
+debug 2023/10/29 21:07:18 Update app component: cursor.BlinkMsg {id:0 tag:38}
+debug 2023/10/29 21:07:18 Update CommandInputModel: {id:0 tag:38}
+debug 2023/10/29 21:07:18 Update app component: tea.KeyMsg esc
