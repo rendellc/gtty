@@ -49,7 +49,6 @@ func (a app) Init() tea.Cmd {
 }
 
 func (a app) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
-	log.Printf("Update app component: %T %+v\n", msg, msg)
 	switch msg := msg.(type) {
 	case tea.KeyMsg:
 		switch msg.Type {

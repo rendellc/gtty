@@ -3,6 +3,7 @@ package models
 import (
 	"fmt"
 	"log"
+	"time"
 
 	"github.com/charmbracelet/bubbles/textinput"
 	tea "github.com/charmbracelet/bubbletea"
@@ -15,14 +16,14 @@ type CommandInputModel struct {
 type InputSubmitMsg struct {
 	Input string
 }
+
 func InputSubmitCmd(input string) tea.Cmd {
 	return func() tea.Msg {
 		return InputSubmitMsg{
 			Input: input,
-		};
+		}
 	}
 }
-
 
 func CreateCommandInput() CommandInputModel {
 	ti := textinput.New()
@@ -31,6 +32,7 @@ func CreateCommandInput() CommandInputModel {
 	ti.Focus()
 	ti.CharLimit = 128
 	ti.Width = 20
+	ti.Cursor.BlinkSpeed = 5 * time.Second
 
 	return CommandInputModel{
 		textInput: ti,
@@ -51,6 +53,7 @@ func (m CommandInputModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		case tea.KeyEnter:
 			input := m.textInput.Value()
 			cmd := InputSubmitCmd(input)
+			m.textInput.SetValue("")
 			return m, cmd
 
 		}
@@ -60,12 +63,9 @@ func (m CommandInputModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	return m, cmd
 }
 
-
-
 func (m CommandInputModel) View() string {
 	return fmt.Sprintf(
 		"%s\n\n(esc to quit)",
 		m.textInput.View(),
 	)
 }
-
