@@ -1,8 +1,6 @@
 package models
 
 import (
-	"fmt"
-	"log"
 	"time"
 
 	"github.com/charmbracelet/bubbles/textinput"
@@ -32,7 +30,7 @@ func CreateCommandInput() CommandInputModel {
 	ti.Focus()
 	ti.CharLimit = 128
 	ti.Width = 20
-	ti.Cursor.BlinkSpeed = 5 * time.Second
+	ti.Cursor.BlinkSpeed = 1 * time.Second
 
 	return CommandInputModel{
 		textInput: ti,
@@ -44,7 +42,6 @@ func (m CommandInputModel) Init() tea.Cmd {
 }
 
 func (m CommandInputModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
-	log.Printf("Update CommandInputModel: %+v\n", msg)
 	var cmd tea.Cmd
 
 	switch msg := msg.(type) {
@@ -55,17 +52,13 @@ func (m CommandInputModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			cmd := InputSubmitCmd(input)
 			m.textInput.SetValue("")
 			return m, cmd
-
 		}
 	}
-
+	
 	m.textInput, cmd = m.textInput.Update(msg)
 	return m, cmd
 }
 
 func (m CommandInputModel) View() string {
-	return fmt.Sprintf(
-		"%s\n\n(esc to quit)",
-		m.textInput.View(),
-	)
+	return m.textInput.View()
 }

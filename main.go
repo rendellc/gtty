@@ -4,10 +4,13 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"time"
 
+	"rendellc/gtty/style"
 	"rendellc/gtty/models"
 
 	tea "github.com/charmbracelet/bubbletea"
+	"github.com/dsyx/serialport-go"
 )
 
 // func createReaderRoutine(filename string) (<-chan string, chan<- int)  {
@@ -39,13 +42,18 @@ import (
 // }
 
 type app struct {
-	commandInput models.CommandInputModel
-	terminalLog  models.TerminalLog
+	commandInput    models.CommandInputModel
+	terminalDisplay models.TerminalDisplay
 }
 
 func (a app) Init() tea.Cmd {
 	log.Println("Initialize app")
-	return nil
+	cmds := []tea.Cmd{}
+	cmds = append(cmds, a.commandInput.Init())
+	cmds = append(cmds, a.terminalDisplay.Init())
+	cmds = append(cmds, tea.EnterAltScreen)
+	cmds = append(cmds, nil)
+	return tea.Batch(cmds...)
 }
 
 func (a app) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
@@ -55,22 +63,23 @@ func (a app) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		case tea.KeyCtrlC, tea.KeyEsc:
 			return a, tea.Quit
 		}
-
 	}
 
+	// log.Printf("Main: got msg type: %T %v", msg, msg)
 	inputModel, cmd1 := a.commandInput.Update(msg)
-	logModel, cmd2 := a.terminalLog.Update(msg)
+	logModel, cmd2 := a.terminalDisplay.Update(msg)
 
 	a.commandInput = inputModel.(models.CommandInputModel)
-	a.terminalLog = logModel.(models.TerminalLog)
+	a.terminalDisplay = logModel.(models.TerminalDisplay)
 
 	return a, tea.Batch(cmd1, cmd2)
 }
 
 func (a app) View() string {
-	return fmt.Sprintf("%s\n\n%s",
+	return fmt.Sprintf("%s\n\n%s\n\n%s",
 		a.commandInput.View(),
-		a.terminalLog.View(),
+		style.HelpLine(),
+		a.terminalDisplay.View(),
 	)
 }
 
@@ -84,10 +93,19 @@ func main() {
 		defer f.Close()
 	}
 
-	app := app{
-		commandInput: models.CreateCommandInput(),
-		terminalLog:  models.CreateTerminalLog(),
+	config := serialport.Config{
+		BaudRate: serialport.BR9600,
+		DataBits: serialport.DB8,
+		StopBits: serialport.SB1,
+		Parity:   serialport.PO,
+		Timeout:  5 * time.Second,
 	}
+
+	app := app{
+		commandInput:    models.CreateCommandInput(),
+		terminalDisplay: models.CreateTerminalDisplay("COM8", config),
+	}
+
 	if _, err := tea.NewProgram(app).Run(); err != nil {
 		log.Fatal(err)
 	}
