@@ -4,42 +4,15 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strings"
 	"time"
 
-	"rendellc/gtty/style"
 	"rendellc/gtty/models"
+	"rendellc/gtty/style"
 
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/dsyx/serialport-go"
 )
-
-// func createReaderRoutine(filename string) (<-chan string, chan<- int)  {
-// 	content := make(chan string)
-// 	commands := make(chan int)
-//
-// 	go func(filename string, content chan<- string, commands <-chan int) {
-// 		file, err := os.Open(filename)
-// 		if err != nil {
-// 			log.Panic(err)
-// 		}
-// 		defer file.Close()
-//
-// 		scanner := bufio.NewScanner(file)
-// 		for scanner.Scan() {
-// 			content <- scanner.Text()
-//
-// 			select {
-// 			case <-commands:
-// 				log.Println("Command received. Quitting")
-// 				close(content)
-// 				return
-// 			default:
-// 			}
-// 		}
-// 	}(filename, content, commands)
-//
-// 	return content, commands
-// }
 
 type app struct {
 	commandInput    models.CommandInputModel
@@ -83,6 +56,72 @@ func (a app) View() string {
 	)
 }
 
+type SerialHandler struct {
+	portName string
+	config serialport.Config
+	connection *serialport.SerialPort
+	buf []byte
+}
+
+func (h SerialHandler) ReadSerial() string {
+	if h.connection == nil {
+		log.Fatalf("ReadSerial called, but connection is nil")
+	}
+
+	n, _ := h.connection.Read(h.buf)
+	return string(h.buf[:n])
+}
+
+func (h *SerialHandler) Open() error {
+	var err error
+	h.connection, err = serialport.Open(h.portName, h.config)
+	if err != nil {
+		return fmt.Errorf("Unable to open serial port: %s", err)
+	}
+	return nil
+}
+
+func (h *SerialHandler) Close() {
+	if h.connection == nil {
+		return
+	}
+
+	h.connection.Close()
+}
+
+func (h *SerialHandler) readSerial(out chan<- string) {
+	for {
+		readString := h.ReadSerial()
+		if len(readString) == 0 {
+			d := 1 * time.Millisecond
+			log.Printf("No data. Sleeping for %v", d)
+			time.Sleep(d)
+			continue
+		}
+		log.Printf("Received %s\n", readString)
+		out <- readString
+	}
+}
+
+func mergeSerialDataToLines(serialData <-chan string, serialLine chan<- string) {
+	partialLines := ""
+	for {
+		select {
+		case s := <-serialData:
+			partialLines += s
+		}
+
+		lines := strings.Split(partialLines, "\n")
+		for i, line := range lines {
+			if i < len(lines) - 1 {
+				line = strings.Trim(line, "\r")
+				serialLine <- line
+			}
+		}
+		partialLines = lines[len(lines) - 1]
+}
+}
+
 func main() {
 	if len(os.Getenv("DEBUG")) > 0 {
 		f, err := tea.LogToFile("debug.log", "debug")
@@ -100,10 +139,28 @@ func main() {
 		Parity:   serialport.PO,
 		Timeout:  5 * time.Second,
 	}
+	serialHandler := new(SerialHandler)
+	serialHandler.portName = "COM8"
+	serialHandler.config = config
+	serialHandler.connection = nil
+	serialHandler.buf = make([]byte, 64)
+
+	if err := serialHandler.Open(); err != nil {
+		log.Fatalf(err.Error())
+	}
+	defer func() {
+		log.Println("Closing connection")
+		serialHandler.Close()
+	}()
+
+	serialChannel := make(chan string)
+	serialLineChannel := make(chan string)
+	go serialHandler.readSerial(serialChannel)
+	go mergeSerialDataToLines(serialChannel, serialLineChannel)
 
 	app := app{
 		commandInput:    models.CreateCommandInput(),
-		terminalDisplay: models.CreateTerminalDisplay("COM8", config),
+		terminalDisplay: models.CreateTerminalDisplay(serialLineChannel),
 	}
 
 	if _, err := tea.NewProgram(app).Run(); err != nil {
