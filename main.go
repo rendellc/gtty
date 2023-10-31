@@ -98,7 +98,6 @@ func (h *SerialHandler) readSerial(out chan<- string) {
 			time.Sleep(d)
 			continue
 		}
-		log.Printf("Received %s\n", readString)
 		out <- readString
 	}
 }
