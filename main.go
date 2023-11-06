@@ -57,10 +57,11 @@ func (a app) View() string {
 }
 
 type SerialHandler struct {
-	portName string
-	config serialport.Config
-	connection *serialport.SerialPort
-	buf []byte
+	portName        string
+	config          serialport.Config
+	connection      *serialport.SerialPort
+	transmitNewline string
+	buf             []byte
 }
 
 func (h SerialHandler) ReadSerial() string {
@@ -70,6 +71,23 @@ func (h SerialHandler) ReadSerial() string {
 
 	n, _ := h.connection.Read(h.buf)
 	return string(h.buf[:n])
+}
+
+func (h SerialHandler) WriteSerial(cmd string) error {
+	if h.connection == nil {
+		log.Fatalf("ReadSerial called, but connection is nil")
+	}
+
+	buf := []byte(cmd + h.transmitNewline)
+	n, err := h.connection.Write(buf)
+	if err != nil {
+		return fmt.Errorf("error writing to serial: %s", err.Error())
+	}
+	if n < len(buf) {
+		return fmt.Errorf("incomplete write, wrote %d out of %d bytes", n, len(buf))
+	}
+
+	return nil
 }
 
 func (h *SerialHandler) Open() error {
@@ -102,6 +120,18 @@ func (h *SerialHandler) readSerial(out chan<- string) {
 	}
 }
 
+func (h *SerialHandler) writeSerial(cmds <-chan string) {
+	for {
+		select {
+		case cmd := <-cmds:
+			err := h.WriteSerial(cmd)
+			if err != nil {
+				log.Printf("Error writing to serial: %s", err.Error())
+			}
+		}
+	}
+}
+
 func mergeSerialDataToLines(serialData <-chan string, serialLine chan<- string) {
 	partialLines := ""
 	for {
@@ -112,24 +142,22 @@ func mergeSerialDataToLines(serialData <-chan string, serialLine chan<- string) 
 
 		lines := strings.Split(partialLines, "\n")
 		for i, line := range lines {
-			if i < len(lines) - 1 {
+			if i < len(lines)-1 {
 				line = strings.Trim(line, "\r")
 				serialLine <- line
 			}
 		}
-		partialLines = lines[len(lines) - 1]
-}
+		partialLines = lines[len(lines)-1]
+	}
 }
 
 func main() {
-	if len(os.Getenv("DEBUG")) > 0 {
-		f, err := tea.LogToFile("debug.log", "debug")
-		if err != nil {
-			fmt.Println("fatal:", err)
-			os.Exit(1)
-		}
-		defer f.Close()
+	f, err := tea.LogToFile("debug.log", "debug")
+	if err != nil {
+		fmt.Println("fatal:", err)
+		os.Exit(1)
 	}
+	defer f.Close()
 
 	config := serialport.Config{
 		BaudRate: serialport.BR9600,
@@ -142,6 +170,7 @@ func main() {
 	serialHandler.portName = "COM8"
 	serialHandler.config = config
 	serialHandler.connection = nil
+	serialHandler.transmitNewline = "\r\n"
 	serialHandler.buf = make([]byte, 64)
 
 	if err := serialHandler.Open(); err != nil {
@@ -153,12 +182,14 @@ func main() {
 	}()
 
 	serialChannel := make(chan string)
+	serialCmdChannel := make(chan string)
 	serialLineChannel := make(chan string)
 	go serialHandler.readSerial(serialChannel)
 	go mergeSerialDataToLines(serialChannel, serialLineChannel)
+	go serialHandler.writeSerial(serialCmdChannel)
 
 	app := app{
-		commandInput:    models.CreateCommandInput(),
+		commandInput:    models.CreateCommandInput(serialCmdChannel),
 		terminalDisplay: models.CreateTerminalDisplay(serialLineChannel),
 	}
 

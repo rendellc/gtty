@@ -9,21 +9,23 @@ import (
 
 type CommandInputModel struct {
 	textInput textinput.Model
+	serialInput chan<- string
 }
 
 type InputSubmitMsg struct {
 	Input string
 }
 
-func InputSubmitCmd(input string) tea.Cmd {
+func (m *CommandInputModel) inputSubmitCmd(cmd string) tea.Cmd {
 	return func() tea.Msg {
+		m.serialInput <- cmd
 		return InputSubmitMsg{
-			Input: input,
+			Input: cmd,
 		}
 	}
 }
 
-func CreateCommandInput() CommandInputModel {
+func CreateCommandInput(serialInputChannel chan<- string) CommandInputModel {
 	ti := textinput.New()
 	ti.Placeholder = "e.g help"
 	ti.Prompt = "Command: "
@@ -34,6 +36,7 @@ func CreateCommandInput() CommandInputModel {
 
 	return CommandInputModel{
 		textInput: ti,
+		serialInput: serialInputChannel,
 	}
 }
 
@@ -49,7 +52,7 @@ func (m CommandInputModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		switch msg.Type {
 		case tea.KeyEnter:
 			input := m.textInput.Value()
-			cmd := InputSubmitCmd(input)
+			cmd := m.inputSubmitCmd(input)
 			m.textInput.SetValue("")
 			return m, cmd
 		}
