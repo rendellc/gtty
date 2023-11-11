@@ -1,6 +1,7 @@
-package models
+package command
 
 import (
+	"rendellc/gtty/serial"
 	"time"
 
 	"github.com/charmbracelet/bubbles/textinput"
@@ -9,7 +10,7 @@ import (
 
 type CommandInputModel struct {
 	textInput textinput.Model
-	serialInput chan<- string
+	serialTx *serial.Transmitter
 }
 
 type InputSubmitMsg struct {
@@ -18,14 +19,14 @@ type InputSubmitMsg struct {
 
 func (m *CommandInputModel) inputSubmitCmd(cmd string) tea.Cmd {
 	return func() tea.Msg {
-		m.serialInput <- cmd
+		m.serialTx.Send(cmd)
 		return InputSubmitMsg{
 			Input: cmd,
 		}
 	}
 }
 
-func CreateCommandInput(serialInputChannel chan<- string) CommandInputModel {
+func CreateCommandInput(tx *serial.Transmitter) CommandInputModel {
 	ti := textinput.New()
 	ti.Placeholder = "e.g help"
 	ti.Prompt = "Command: "
@@ -36,7 +37,7 @@ func CreateCommandInput(serialInputChannel chan<- string) CommandInputModel {
 
 	return CommandInputModel{
 		textInput: ti,
-		serialInput: serialInputChannel,
+		serialTx: tx,
 	}
 }
 

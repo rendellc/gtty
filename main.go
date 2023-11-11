@@ -1,22 +1,23 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"log"
 	"os"
-	"strings"
 	"time"
 
-	"rendellc/gtty/models"
+	"rendellc/gtty/command"
+	"rendellc/gtty/flow"
 	"rendellc/gtty/style"
+	"rendellc/gtty/serial"
 
 	tea "github.com/charmbracelet/bubbletea"
-	"github.com/dsyx/serialport-go"
 )
 
 type app struct {
-	commandInput    models.CommandInputModel
-	terminalDisplay models.TerminalDisplay
+	commandInput    command.CommandInputModel
+	terminalDisplay flow.Model
 }
 
 func (a app) Init() tea.Cmd {
@@ -25,7 +26,6 @@ func (a app) Init() tea.Cmd {
 	cmds = append(cmds, a.commandInput.Init())
 	cmds = append(cmds, a.terminalDisplay.Init())
 	cmds = append(cmds, tea.EnterAltScreen)
-	cmds = append(cmds, nil)
 	return tea.Batch(cmds...)
 }
 
@@ -42,8 +42,8 @@ func (a app) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	inputModel, cmd1 := a.commandInput.Update(msg)
 	logModel, cmd2 := a.terminalDisplay.Update(msg)
 
-	a.commandInput = inputModel.(models.CommandInputModel)
-	a.terminalDisplay = logModel.(models.TerminalDisplay)
+	a.commandInput = inputModel.(command.CommandInputModel)
+	a.terminalDisplay = logModel.(flow.Model)
 
 	return a, tea.Batch(cmd1, cmd2)
 }
@@ -56,102 +56,17 @@ func (a app) View() string {
 	)
 }
 
-type SerialHandler struct {
-	portName        string
-	config          serialport.Config
-	connection      *serialport.SerialPort
-	transmitNewline string
-	buf             []byte
-}
-
-func (h SerialHandler) ReadSerial() string {
-	if h.connection == nil {
-		log.Fatalf("ReadSerial called, but connection is nil")
-	}
-
-	n, _ := h.connection.Read(h.buf)
-	return string(h.buf[:n])
-}
-
-func (h SerialHandler) WriteSerial(cmd string) error {
-	if h.connection == nil {
-		log.Fatalf("ReadSerial called, but connection is nil")
-	}
-
-	buf := []byte(cmd + h.transmitNewline)
-	n, err := h.connection.Write(buf)
-	if err != nil {
-		return fmt.Errorf("error writing to serial: %s", err.Error())
-	}
-	if n < len(buf) {
-		return fmt.Errorf("incomplete write, wrote %d out of %d bytes", n, len(buf))
-	}
-
-	return nil
-}
-
-func (h *SerialHandler) Open() error {
-	var err error
-	h.connection, err = serialport.Open(h.portName, h.config)
-	if err != nil {
-		return fmt.Errorf("Unable to open serial port: %s", err)
-	}
-	return nil
-}
-
-func (h *SerialHandler) Close() {
-	if h.connection == nil {
-		return
-	}
-
-	h.connection.Close()
-}
-
-func (h *SerialHandler) readSerial(out chan<- string) {
-	for {
-		readString := h.ReadSerial()
-		if len(readString) == 0 {
-			d := 1 * time.Millisecond
-			log.Printf("No data. Sleeping for %v", d)
-			time.Sleep(d)
-			continue
-		}
-		out <- readString
-	}
-}
-
-func (h *SerialHandler) writeSerial(cmds <-chan string) {
-	for {
-		select {
-		case cmd := <-cmds:
-			err := h.WriteSerial(cmd)
-			if err != nil {
-				log.Printf("Error writing to serial: %s", err.Error())
-			}
-		}
-	}
-}
-
-func mergeSerialDataToLines(serialData <-chan string, serialLine chan<- string) {
-	partialLines := ""
-	for {
-		select {
-		case s := <-serialData:
-			partialLines += s
-		}
-
-		lines := strings.Split(partialLines, "\n")
-		for i, line := range lines {
-			if i < len(lines)-1 {
-				line = strings.Trim(line, "\r")
-				serialLine <- line
-			}
-		}
-		partialLines = lines[len(lines)-1]
-	}
+type AppConfig struct {
+	SerialConfig   serial.Config
+	SimulateSerial bool
 }
 
 func main() {
+	config := AppConfig{}
+
+	flag.BoolVar(&config.SimulateSerial, "sim", false, "Simulate serial data")
+	flag.Parse()
+
 	f, err := tea.LogToFile("debug.log", "debug")
 	if err != nil {
 		fmt.Println("fatal:", err)
@@ -159,38 +74,34 @@ func main() {
 	}
 	defer f.Close()
 
-	config := serialport.Config{
-		BaudRate: serialport.BR9600,
-		DataBits: serialport.DB8,
-		StopBits: serialport.SB1,
-		Parity:   serialport.PO,
-		Timeout:  5 * time.Second,
-	}
-	serialHandler := new(SerialHandler)
-	serialHandler.portName = "COM8"
-	serialHandler.config = config
-	serialHandler.connection = nil
-	serialHandler.transmitNewline = "\r\n"
-	serialHandler.buf = make([]byte, 64)
 
-	if err := serialHandler.Open(); err != nil {
-		log.Fatalf(err.Error())
-	}
-	defer func() {
-		log.Println("Closing connection")
-		serialHandler.Close()
-	}()
 
-	serialChannel := make(chan string)
-	serialCmdChannel := make(chan string)
-	serialLineChannel := make(chan string)
-	go serialHandler.readSerial(serialChannel)
-	go mergeSerialDataToLines(serialChannel, serialLineChannel)
-	go serialHandler.writeSerial(serialCmdChannel)
+	// config.SerialConfig.Device = "COM8"
+	config.SerialConfig.Device = "/dev/random"
+	config.SerialConfig.BaudRate = 9600
+	config.SerialConfig.DataBits = 8
+	config.SerialConfig.StopBits = 1
+	config.SerialConfig.Parity = "odd"
+	config.SerialConfig.Timeout = 5*time.Second
+	config.SerialConfig.TransmitNewline = "\r\n"
+
+	connection := serial.CreateConnection(config.SerialConfig)
+	defer connection.Close()
+
+	rx, tx, err := connection.Start()
+	if err != nil {
+		log.Printf("Error starting listener: %v", err.Error())
+	}
+	time.Sleep(1*time.Second)
+	log.Printf("Rx: %s\n", rx.Get())
+	time.Sleep(1*time.Second)
+	log.Printf("Rx: %s\n", rx.Get())
+	time.Sleep(1*time.Second)
+	log.Printf("Rx: %s\n", rx.Get())
 
 	app := app{
-		commandInput:    models.CreateCommandInput(serialCmdChannel),
-		terminalDisplay: models.CreateTerminalDisplay(serialLineChannel),
+		commandInput:    command.CreateCommandInput(&tx),
+		terminalDisplay: flow.CreateFlowModel(&rx),
 	}
 
 	if _, err := tea.NewProgram(app).Run(); err != nil {

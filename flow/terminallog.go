@@ -1,8 +1,11 @@
-package models
+package flow
 
 import (
 	"fmt"
 	"log"
+
+	"rendellc/gtty/command"
+	"rendellc/gtty/serial"
 
 	"github.com/charmbracelet/bubbles/spinner"
 	tea "github.com/charmbracelet/bubbletea"
@@ -15,32 +18,32 @@ type terminalLine struct {
 
 type ReceivedTerminalLineMsg string
 
-type TerminalDisplay struct {
+type Model struct {
 	lines            []terminalLine
 	loadingIndicator spinner.Model
-	serialLine           <-chan string
+	serialRx        *serial.Receiver
 }
 
-func (sp *TerminalDisplay) waitForSerialLines() tea.Cmd {
+func (sp *Model) waitForSerialLines() tea.Cmd {
 	return func() tea.Msg {
-		return ReceivedTerminalLineMsg(<-sp.serialLine)
+		return ReceivedTerminalLineMsg(sp.serialRx.Get())
 	}
 }
 
-func CreateTerminalDisplay(serialLines <-chan string) TerminalDisplay {
+func CreateFlowModel(rx *serial.Receiver) Model {
 	lines := make([]terminalLine, 0)
 	loadingIndicator := spinner.New()
 	loadingIndicator.Spinner = spinner.Dot
 	loadingIndicator.Style = lipgloss.NewStyle().Foreground(lipgloss.Color("205"))
 
-	return TerminalDisplay{
+	return Model{
 		lines:            lines,
 		loadingIndicator: loadingIndicator,
-		serialLine: serialLines,
+		serialRx: rx,
 	}
 }
 
-func (sp TerminalDisplay) Init() tea.Cmd {
+func (sp Model) Init() tea.Cmd {
 	log.Printf("Init TerminalDisplay\n")
 	return tea.Batch(
 		sp.loadingIndicator.Tick,
@@ -48,7 +51,7 @@ func (sp TerminalDisplay) Init() tea.Cmd {
 	)
 }
 
-func (sp TerminalDisplay) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
+func (sp Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	cmds := []tea.Cmd{}
 
 	var cmd tea.Cmd
@@ -61,7 +64,7 @@ func (sp TerminalDisplay) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		case tea.KeyDelete:
 			sp.lines = sp.lines[:0]
 		}
-	case InputSubmitMsg:
+	case command.InputSubmitMsg:
 		sp.lines = append(sp.lines, terminalLine{
 			content: msg.Input,
 		})
@@ -75,7 +78,7 @@ func (sp TerminalDisplay) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	return sp, tea.Batch(cmds...)
 }
 
-func (sp TerminalDisplay) View() string {
+func (sp Model) View() string {
 	s := ""
 	for _, line := range sp.lines {
 		s += fmt.Sprintf("%s\n", line.content)
