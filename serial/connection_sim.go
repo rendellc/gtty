@@ -1,6 +1,7 @@
 package serial
 
 import (
+	"fmt"
 	"log"
 	"math/rand"
 	"time"
@@ -42,20 +43,26 @@ func (c connectionSim) Close() {}
 
 func (c *connectionSim) simulateWithLines() {
 	i := 0 
+	data1 := 1.3 
 	for {
-		line := c.lines[i]
+		select {
+		case <-c.txChan:
 
-		log.Printf("Sending '%v' to rxChan", line)
-		c.rxChan <- line
-		i = (i + 1) % len(c.lines)
+		default:
+			data1 += rand.NormFloat64() * 0.001
+			line := fmt.Sprintf("%d, %.3f", i, data1)
+
+			log.Printf("Sending '%v' to rxChan", line)
+			c.rxChan <- line
+			i = (i + 1) % len(c.lines)
 
 
-		rateMillis := 1 / float64(c.period.Milliseconds())
-		sleepMillis := rand.ExpFloat64() / rateMillis
-		d := time.Duration(int64(sleepMillis) * int64(time.Millisecond))
-		time.Sleep(d)
+			rateMillis := 1 / float64(c.period.Milliseconds())
+			sleepMillis := rand.ExpFloat64() / rateMillis
+			d := time.Duration(int64(sleepMillis) * int64(time.Millisecond))
+			time.Sleep(d)
+			i += 1
+		}
 	}
 }
-
-
 

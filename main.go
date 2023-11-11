@@ -114,7 +114,7 @@ func main() {
 
 	var connection serial.Connection
 	if config.SimulateSerial {
-		connection = serial.SimulateConnection(lines, 1*time.Second)
+		connection = serial.SimulateConnection(lines, 500*time.Millisecond)
 	} else {
 		connection = serial.CreateConnection(config.SerialConfig)
 	}
@@ -124,14 +124,6 @@ func main() {
 	if err != nil {
 		log.Printf("Error starting listener: %v", err.Error())
 	}
-	log.Printf("Connection is started")
-
-	time.Sleep(1*time.Second)
-	log.Printf("Rx: %s\n", rx.Get())
-	time.Sleep(1*time.Second)
-	log.Printf("Rx: %s\n", rx.Get())
-	time.Sleep(1*time.Second)
-	log.Printf("Rx: %s\n", rx.Get())
 
 	app := app{
 		commandInput:    command.CreateCommandInput(&tx),

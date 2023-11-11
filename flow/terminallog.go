@@ -3,11 +3,13 @@ package flow
 import (
 	"fmt"
 	"log"
+	"strings"
 
 	"rendellc/gtty/command"
 	"rendellc/gtty/serial"
 
 	"github.com/charmbracelet/bubbles/spinner"
+	"github.com/charmbracelet/bubbles/viewport"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
 )
@@ -21,12 +23,14 @@ type ReceivedTerminalLineMsg string
 type Model struct {
 	lines            []terminalLine
 	loadingIndicator spinner.Model
-	serialRx        *serial.Receiver
+	ready            bool
+	viewport         viewport.Model
+	serialRx         *serial.Receiver
 }
 
-func (sp *Model) waitForSerialLines() tea.Cmd {
+func (m *Model) waitForSerialLines() tea.Cmd {
 	return func() tea.Msg {
-		return ReceivedTerminalLineMsg(sp.serialRx.Get())
+		return ReceivedTerminalLineMsg(m.serialRx.Get())
 	}
 }
 
@@ -39,50 +43,105 @@ func CreateFlowModel(rx *serial.Receiver) Model {
 	return Model{
 		lines:            lines,
 		loadingIndicator: loadingIndicator,
-		serialRx: rx,
+		ready:            false,
+		serialRx:         rx,
 	}
 }
 
-func (sp Model) Init() tea.Cmd {
+func (m Model) Init() tea.Cmd {
 	log.Printf("Init TerminalDisplay\n")
 	return tea.Batch(
-		sp.loadingIndicator.Tick,
-		sp.waitForSerialLines(),
+		m.loadingIndicator.Tick,
+		m.waitForSerialLines(),
 	)
 }
 
-func (sp Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
+func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	cmds := []tea.Cmd{}
 
 	var cmd tea.Cmd
-	sp.loadingIndicator, cmd = sp.loadingIndicator.Update(msg)
+	m.loadingIndicator, cmd = m.loadingIndicator.Update(msg)
 	cmds = append(cmds, cmd)
 
+	updateContent := false
+
 	switch msg := msg.(type) {
+	case tea.WindowSizeMsg:
+		headerHeight := lipgloss.Height(m.headerView()) + 5
+		footerHeight := lipgloss.Height(m.footerView())
+		verticalMarginHeight := headerHeight + footerHeight
+
+		if !m.ready {
+			m.viewport = viewport.New(msg.Width, msg.Height - verticalMarginHeight)
+			m.viewport.YPosition = headerHeight
+			m.viewport.HighPerformanceRendering = false
+			m.viewport.SetContent("waiting for content to load")
+			m.ready = true
+		} else {
+			m.viewport.Width = msg.Width
+			m.viewport.Height = msg.Height - verticalMarginHeight
+		}
+
 	case tea.KeyMsg:
 		switch msg.Type {
 		case tea.KeyDelete:
-			sp.lines = sp.lines[:0]
+			m.lines = m.lines[:0]
+			updateContent = true
 		}
 	case command.InputSubmitMsg:
-		sp.lines = append(sp.lines, terminalLine{
+		m.lines = append(m.lines, terminalLine{
 			content: msg.Input,
 		})
+		updateContent = true
 	case ReceivedTerminalLineMsg:
-		sp.lines = append(sp.lines, terminalLine{
+
+		m.lines = append(m.lines, terminalLine{
 			content: string(msg),
 		})
-		cmds = append(cmds, sp.waitForSerialLines())
+		cmds = append(cmds, m.waitForSerialLines())
+		updateContent = true
 	}
 
-	return sp, tea.Batch(cmds...)
+	if updateContent {
+		s := strings.Builder{}
+		for _, line := range m.lines {
+			s.WriteString(line.content)
+			s.WriteString("\n")
+		}
+
+		m.viewport.SetContent(s.String())
+		// m.viewport.GotoBottom()
+	}
+
+
+	m.viewport, cmd = m.viewport.Update(msg)
+
+	cmds = append(cmds, cmd)
+
+	return m, tea.Batch(cmds...)
 }
 
-func (sp Model) View() string {
-	s := ""
-	for _, line := range sp.lines {
-		s += fmt.Sprintf("%s\n", line.content)
+func (m Model) View() string {
+	if !m.ready {
+		return "Initilizing"
 	}
-	s += sp.loadingIndicator.View()
-	return s
+
+	return fmt.Sprintf("%s\n%s\n%s", m.headerView(), m.viewport.View(), m.footerView())
+	// s := ""
+	// for _, line := range m.lines {
+	// 	s += fmt.Sprintf("%s\n", line.content)
+	// }
+	// s += m.loadingIndicator.View()
+	// return s
+}
+
+func (m Model) headerView() string {
+	line := strings.Repeat("-", max(0, m.viewport.Width))
+	return line
+}
+
+func (m Model) footerView() string {
+	info := fmt.Sprintf("%3.f%%", m.viewport.ScrollPercent()*100)
+	line := strings.Repeat("-", max(0, m.viewport.Width - lipgloss.Width(info)))
+	return lipgloss.JoinHorizontal(lipgloss.Center, line, info)
 }
