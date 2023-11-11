@@ -25,6 +25,14 @@ var InfoFooter = func() lipgloss.Style {
 	return CommandFooter.Copy().BorderStyle(b)
 }()
 
+var ViewFooter = func() lipgloss.Style {
+	b := lipgloss.RoundedBorder()
+	b.Right = "├"
+	b.Left = "┤"
+	return CommandFooter.Copy().BorderStyle(b)
+}()
+
+var MainView = lipgloss.NewStyle()
 
 func HelpLine() string {
 	options := []string{

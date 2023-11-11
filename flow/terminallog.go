@@ -108,7 +108,7 @@ func (m Model) Update(msg tea.Msg) (Model, tea.Cmd) {
 	return m, tea.Batch(cmds...)
 }
 
-func (m Model) View(commandStr string) string {
+func (m Model) View() string {
 	if !m.ready {
 		return "Initilizing"
 	}

@@ -28,12 +28,12 @@ func (m *CommandInputModel) inputSubmitCmd(cmd string) tea.Cmd {
 
 func CreateCommandInput(tx *serial.Transmitter) CommandInputModel {
 	ti := textinput.New()
-	ti.Placeholder = "e.g help"
+	//ti.Placeholder = ""
 	ti.Prompt = "Command: "
-	ti.Focus()
 	ti.CharLimit = 0
 	ti.Width = 0
 	ti.Cursor.BlinkSpeed = 1 * time.Second
+	ti.Focus()
 
 	return CommandInputModel{
 		textInput: ti,
@@ -65,4 +65,8 @@ func (m CommandInputModel) Update(msg tea.Msg) (CommandInputModel, tea.Cmd) {
 
 func (m CommandInputModel) View() string {
 	return m.textInput.View()
+}
+
+func (m* CommandInputModel) SetMaxWidth(width int) {
+	m.textInput.Width = width
 }
