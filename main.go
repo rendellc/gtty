@@ -15,6 +15,34 @@ import (
 	tea "github.com/charmbracelet/bubbletea"
 )
 
+var lines []string = []string{
+	"line1",
+	"line2",
+	"line3",
+	"line4",
+	"line5",
+	"line6",
+	"line7",
+	"line8",
+	"line9",
+	"line10",
+	"line11",
+	"line12",
+	"line13",
+	"line14",
+	"line15",
+	"line16",
+	"line17",
+	"line18",
+	"line19",
+	"line20",
+	"line21",
+	"line22",
+	"line23",
+	"line24",
+	"line25",
+}
+
 type app struct {
 	commandInput    command.CommandInputModel
 	terminalDisplay flow.Model
@@ -63,7 +91,6 @@ type AppConfig struct {
 
 func main() {
 	config := AppConfig{}
-
 	flag.BoolVar(&config.SimulateSerial, "sim", false, "Simulate serial data")
 	flag.Parse()
 
@@ -74,10 +101,7 @@ func main() {
 	}
 	defer f.Close()
 
-
-
-	// config.SerialConfig.Device = "COM8"
-	config.SerialConfig.Device = "/dev/random"
+	config.SerialConfig.Device = "COM8"
 	config.SerialConfig.BaudRate = 9600
 	config.SerialConfig.DataBits = 8
 	config.SerialConfig.StopBits = 1
@@ -85,13 +109,23 @@ func main() {
 	config.SerialConfig.Timeout = 5*time.Second
 	config.SerialConfig.TransmitNewline = "\r\n"
 
-	connection := serial.CreateConnection(config.SerialConfig)
+
+	log.Printf("Config is %+v", config)
+
+	var connection serial.Connection
+	if config.SimulateSerial {
+		connection = serial.SimulateConnection(lines, 1*time.Second)
+	} else {
+		connection = serial.CreateConnection(config.SerialConfig)
+	}
 	defer connection.Close()
 
 	rx, tx, err := connection.Start()
 	if err != nil {
 		log.Printf("Error starting listener: %v", err.Error())
 	}
+	log.Printf("Connection is started")
+
 	time.Sleep(1*time.Second)
 	log.Printf("Rx: %s\n", rx.Get())
 	time.Sleep(1*time.Second)
