@@ -8,15 +8,13 @@ import (
 )
 
 type connectionSim struct {
-	lines  []string
 	period   time.Duration
 	rxChan chan string
 	txChan chan string
 }
 
-func SimulateConnection(lines []string, period time.Duration) Connection {
+func SimulateConnection(period time.Duration) Connection {
 	return connectionSim{
-		lines: lines,
 		period:  period,
 		rxChan: make(chan string),
 		txChan: make(chan string),
@@ -54,7 +52,6 @@ func (c *connectionSim) simulateWithLines() {
 
 			log.Printf("Sending '%v' to rxChan", line)
 			c.rxChan <- line
-			i = (i + 1) % len(c.lines)
 
 
 			rateMillis := 1 / float64(c.period.Milliseconds())

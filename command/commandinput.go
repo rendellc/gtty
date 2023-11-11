@@ -31,8 +31,8 @@ func CreateCommandInput(tx *serial.Transmitter) CommandInputModel {
 	ti.Placeholder = "e.g help"
 	ti.Prompt = "Command: "
 	ti.Focus()
-	ti.CharLimit = 128
-	ti.Width = 20
+	ti.CharLimit = 0
+	ti.Width = 0
 	ti.Cursor.BlinkSpeed = 1 * time.Second
 
 	return CommandInputModel{
@@ -45,7 +45,7 @@ func (m CommandInputModel) Init() tea.Cmd {
 	return textinput.Blink
 }
 
-func (m CommandInputModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
+func (m CommandInputModel) Update(msg tea.Msg) (CommandInputModel, tea.Cmd) {
 	var cmd tea.Cmd
 
 	switch msg := msg.(type) {

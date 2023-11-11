@@ -5,47 +5,28 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strings"
 	"time"
 
 	"rendellc/gtty/command"
 	"rendellc/gtty/flow"
-	"rendellc/gtty/style"
 	"rendellc/gtty/serial"
+	"rendellc/gtty/style"
 
 	tea "github.com/charmbracelet/bubbletea"
+	"github.com/charmbracelet/lipgloss"
 )
 
-var lines []string = []string{
-	"line1",
-	"line2",
-	"line3",
-	"line4",
-	"line5",
-	"line6",
-	"line7",
-	"line8",
-	"line9",
-	"line10",
-	"line11",
-	"line12",
-	"line13",
-	"line14",
-	"line15",
-	"line16",
-	"line17",
-	"line18",
-	"line19",
-	"line20",
-	"line21",
-	"line22",
-	"line23",
-	"line24",
-	"line25",
+type appConfig struct {
+	SerialConfig   serial.Config
+	SimulateSerial bool
 }
 
 type app struct {
 	commandInput    command.CommandInputModel
 	terminalDisplay flow.Model
+	width           int
+	height          int
 }
 
 func (a app) Init() tea.Cmd {
@@ -59,6 +40,9 @@ func (a app) Init() tea.Cmd {
 
 func (a app) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	switch msg := msg.(type) {
+	case tea.WindowSizeMsg:
+		a.width = msg.Width
+		a.height = msg.Height
 	case tea.KeyMsg:
 		switch msg.Type {
 		case tea.KeyCtrlC, tea.KeyEsc:
@@ -70,27 +54,31 @@ func (a app) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	inputModel, cmd1 := a.commandInput.Update(msg)
 	logModel, cmd2 := a.terminalDisplay.Update(msg)
 
-	a.commandInput = inputModel.(command.CommandInputModel)
-	a.terminalDisplay = logModel.(flow.Model)
+	a.commandInput = inputModel
+	a.terminalDisplay = logModel
 
 	return a, tea.Batch(cmd1, cmd2)
 }
 
+func (a app) footerView(commandStr string, scrollPercent int) string {
+	command := style.CommandFooter.Render(commandStr)
+	info := style.InfoFooter.Render(fmt.Sprintf("%d%%", scrollPercent))
+
+	line := strings.Repeat("─", max(0, a.width - lipgloss.Width(command)-lipgloss.Width(info)))
+	return lipgloss.JoinHorizontal(lipgloss.Center, command, line, info)
+}
+
 func (a app) View() string {
-	return fmt.Sprintf("%s\n\n%s\n\n%s",
-		a.commandInput.View(),
-		style.HelpLine(),
-		a.terminalDisplay.View(),
+	return fmt.Sprintf("%s\n%s",
+		a.terminalDisplay.View("hello"),
+		a.footerView(a.commandInput.View(), a.terminalDisplay.ScrollPercent()),
+		// a.commandInput.View(),
+		// style.HelpLine(),
 	)
 }
 
-type AppConfig struct {
-	SerialConfig   serial.Config
-	SimulateSerial bool
-}
-
 func main() {
-	config := AppConfig{}
+	config := appConfig{}
 	flag.BoolVar(&config.SimulateSerial, "sim", false, "Simulate serial data")
 	flag.Parse()
 
@@ -106,15 +94,14 @@ func main() {
 	config.SerialConfig.DataBits = 8
 	config.SerialConfig.StopBits = 1
 	config.SerialConfig.Parity = "odd"
-	config.SerialConfig.Timeout = 5*time.Second
+	config.SerialConfig.Timeout = 5 * time.Second
 	config.SerialConfig.TransmitNewline = "\r\n"
-
 
 	log.Printf("Config is %+v", config)
 
 	var connection serial.Connection
 	if config.SimulateSerial {
-		connection = serial.SimulateConnection(lines, 500*time.Millisecond)
+		connection = serial.SimulateConnection(500 * time.Millisecond)
 	} else {
 		connection = serial.CreateConnection(config.SerialConfig)
 	}
@@ -125,9 +112,11 @@ func main() {
 		log.Printf("Error starting listener: %v", err.Error())
 	}
 
+	commandInput := command.CreateCommandInput(&tx)
+	terminalDisplay := flow.CreateFlowModel(&rx)
 	app := app{
-		commandInput:    command.CreateCommandInput(&tx),
-		terminalDisplay: flow.CreateFlowModel(&rx),
+		commandInput:    commandInput,
+		terminalDisplay: terminalDisplay,
 	}
 
 	if _, err := tea.NewProgram(app).Run(); err != nil {
