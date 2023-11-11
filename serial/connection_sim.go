@@ -44,7 +44,9 @@ func (c *connectionSim) simulateWithLines() {
 	data1 := 1.3 
 	for {
 		select {
-		case <-c.txChan:
+		case msg := <-c.txChan:
+			c.rxChan <- "echo: " + msg
+
 
 		default:
 			data1 += rand.NormFloat64() * 0.001
