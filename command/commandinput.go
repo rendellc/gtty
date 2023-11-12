@@ -1,6 +1,7 @@
 package command
 
 import (
+	"log"
 	"rendellc/gtty/serial"
 	"time"
 
@@ -8,16 +9,16 @@ import (
 	tea "github.com/charmbracelet/bubbletea"
 )
 
-type CommandInputModel struct {
+type Model struct {
 	textInput textinput.Model
-	serialTx *serial.Transmitter
+	serialTx  *serial.Transmitter
 }
 
 type InputSubmitMsg struct {
 	Input string
 }
 
-func (m *CommandInputModel) inputSubmitCmd(cmd string) tea.Cmd {
+func (m *Model) inputSubmitCmd(cmd string) tea.Cmd {
 	return func() tea.Msg {
 		m.serialTx.Send(cmd)
 		return InputSubmitMsg{
@@ -26,26 +27,36 @@ func (m *CommandInputModel) inputSubmitCmd(cmd string) tea.Cmd {
 	}
 }
 
-func CreateCommandInput(tx *serial.Transmitter) CommandInputModel {
+func CreateCommandInput(tx *serial.Transmitter) Model {
 	ti := textinput.New()
 	//ti.Placeholder = ""
 	ti.Prompt = "Command: "
 	ti.CharLimit = 0
 	ti.Width = 0
 	ti.Cursor.BlinkSpeed = 1 * time.Second
-	ti.Focus()
+	ti.Blur()
 
-	return CommandInputModel{
+	return Model{
 		textInput: ti,
-		serialTx: tx,
+		serialTx:  tx,
 	}
 }
 
-func (m CommandInputModel) Init() tea.Cmd {
+func (m *Model) SetEnabled(enabled bool) {
+	if enabled {
+		m.textInput.Focus()
+	} else {
+		m.textInput.Blur()
+		m.textInput.Placeholder = "connect to send commands"
+	}
+}
+
+func (m Model) Init() tea.Cmd {
+	log.Println("Initialize command.Model")
 	return textinput.Blink
 }
 
-func (m CommandInputModel) Update(msg tea.Msg) (CommandInputModel, tea.Cmd) {
+func (m Model) Update(msg tea.Msg) (Model, tea.Cmd) {
 	var cmd tea.Cmd
 
 	switch msg := msg.(type) {
@@ -58,15 +69,15 @@ func (m CommandInputModel) Update(msg tea.Msg) (CommandInputModel, tea.Cmd) {
 			return m, cmd
 		}
 	}
-	
+
 	m.textInput, cmd = m.textInput.Update(msg)
 	return m, cmd
 }
 
-func (m CommandInputModel) View() string {
+func (m Model) View() string {
 	return m.textInput.View()
 }
 
-func (m* CommandInputModel) SetMaxWidth(width int) {
+func (m *Model) SetMaxWidth(width int) {
 	m.textInput.Width = width
 }

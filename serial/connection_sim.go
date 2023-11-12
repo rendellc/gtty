@@ -8,53 +8,66 @@ import (
 )
 
 type connectionSim struct {
-	period   time.Duration
-	rxChan chan string
-	txChan chan string
+	period  time.Duration
+	rxChan  chan string
+	txChan  chan string
+	running bool
 }
 
 func SimulateConnection(period time.Duration) Connection {
-	return connectionSim{
+	c := connectionSim{
 		period:  period,
-		rxChan: make(chan string),
-		txChan: make(chan string),
+		rxChan:  make(chan string),
+		txChan:  make(chan string),
+		running: false,
 	}
+
+	return c
 }
 
-func (c connectionSim) Start() (Receiver, Transmitter, error) {
-	receiver := Receiver{
-		channel: new(<-chan string),
-	}
-	transmitter := Transmitter{
-		channel: new(chan<- string),
-	}
-
-	*receiver.channel = c.rxChan
-	*transmitter.channel = c.txChan
+func (c connectionSim) Start() error {
 	go c.simulateWithLines()
-
-	return receiver, transmitter, nil
+	return nil
 }
 
 func (c connectionSim) Close() {}
 
+func (c connectionSim) GetReceiver() Receiver {
+	receiver := Receiver{
+		channel: new(<-chan string),
+	}
+	*receiver.channel = c.rxChan
+
+	return receiver
+}
+
+func (c connectionSim) GetTransmitter() Transmitter {
+	transmitter := Transmitter{
+		channel: new(chan<- string),
+	}
+	*transmitter.channel = c.rxChan
+
+	return transmitter
+}
 
 func (c *connectionSim) simulateWithLines() {
-	i := 0 
-	data1 := 1.3 
+	i := 0
+	data1 := 1.3
 	for {
+		if !c.running {
+			return
+		}
+
 		select {
 		case msg := <-c.txChan:
 			c.rxChan <- "echo: " + msg
 
-
 		default:
-			data1 += rand.NormFloat64() * 0.001
+			data1 += rand.NormFloat64() * 0.01
 			line := fmt.Sprintf("%d, %.3f", i, data1)
 
 			log.Printf("Sending '%v' to rxChan", line)
 			c.rxChan <- line
-
 
 			rateMillis := 1 / float64(c.period.Milliseconds())
 			sleepMillis := rand.ExpFloat64() / rateMillis
@@ -64,4 +77,3 @@ func (c *connectionSim) simulateWithLines() {
 		}
 	}
 }
-

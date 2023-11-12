@@ -66,33 +66,43 @@ func CreateConnection(config Config) Connection {
 	}
 }
 
-func (c connectionReal) Start() (Receiver, Transmitter, error) {
-	receiver := Receiver{
-		channel: new(<-chan string),
-	}
-	transmitter := Transmitter{
-		channel: new(chan<- string),
-	}
-
+func (c connectionReal) Start() error {
 	if c.rxChan != nil && c.txChan != nil {
-		return receiver, transmitter, fmt.Errorf("already running")
+		return fmt.Errorf("already running")
 	}
 	var err error
 	c.sp, err = serialport.Open(c.device, c.config)
 	if err != nil {
-		return receiver, transmitter, err
+		return err
 	}
 
 	c.rxChan = make(chan string)
 	c.txChan = make(chan string)
 	c.rwChan = make(chan readWriterCommand)
-	*receiver.channel = c.rxChan
-	*transmitter.channel = c.txChan
 
 	go c.serialReadWriter()
 
-	return receiver, transmitter, nil
+	return nil
 }
+
+func (c connectionReal) GetReceiver() Receiver {
+	receiver := Receiver{
+		channel: new(<-chan string),
+	}
+	*receiver.channel = c.rxChan
+
+	return receiver
+}
+
+func (c connectionReal) GetTransmitter() Transmitter {
+	transmitter := Transmitter{
+		channel: new(chan<- string),
+	}
+	*transmitter.channel = c.rxChan
+
+	return transmitter
+}
+
 
 func (c *connectionReal) serialReadWriter() {
 	rxChanRaw := make(chan string)
