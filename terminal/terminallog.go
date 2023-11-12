@@ -21,6 +21,7 @@ type Model struct {
 	lines            []terminalLine
 	ready            bool
 	scrollIndex int
+	visibleLines int
 	serialRx         *serial.Receiver
 }
 
@@ -47,8 +48,12 @@ func CreateFlowModel(rx *serial.Receiver) Model {
 	}
 }
 
-func (m *Model) SetReceiver(rx *serial.Receiver) {
-	m.serialRx = rx
+func (m *Model) SetVisibleLines(lineCount int) {
+	m.visibleLines = lineCount
+}
+
+func (m Model) AtMostRecent() bool {
+	return m.scrollIndex + m.visibleLines >= len(m.lines)
 }
 
 func (m Model) Init() tea.Cmd {
@@ -62,6 +67,7 @@ func (m Model) Update(msg tea.Msg) (Model, tea.Cmd) {
 	var cmd tea.Cmd
 	cmds := []tea.Cmd{}
 
+	atMostRecent := m.AtMostRecent()
 
 	switch msg := msg.(type) {
 	case tea.KeyMsg:
@@ -82,19 +88,51 @@ func (m Model) Update(msg tea.Msg) (Model, tea.Cmd) {
 	}
 
 	cmds = append(cmds, cmd)
+	if atMostRecent {
+		m.scrollIndex = max(0, len(m.lines) - m.visibleLines)
+	}
+
 
 	return m, tea.Batch(cmds...)
 }
 
-func (m Model) View(lineCount int) string {
-	if lineCount == 0 {
-		return "Initilizing"
+func (m Model) View() string {
+	if len(m.lines) < m.visibleLines {
+		m.visibleLines = len(m.lines)
+	}
+	if m.visibleLines == 0 {
+		return "<Waiting for data>"
+	}
+
+	// Know now that lineCount <= len(m.lines)
+	// Need to enforce for each 
+	//    i in [m.scrollIndex, m.scrollIndex + lineCount)
+	//    0 <= i < len(m.lines)
+	lastIndex := m.scrollIndex + m.visibleLines - 1
+	maxIndex := len(m.lines) - 1
+	if lastIndex > maxIndex {
+		countTooMany := lastIndex - maxIndex
+		m.scrollIndex -= countTooMany
 	}
 
 	lines := []string{}
-	for i, termline := range m.lines {
-		lines[i] = termline.content
+	for i := m.scrollIndex; i < m.scrollIndex + m.visibleLines; i++ {
+		lines = append(lines, m.lines[i].content)
 	}
 
 	return strings.Join(lines, "\n")
+}
+
+func min(a, b int) int {
+	if a < b{
+		return a
+	}
+	return b
+}
+
+func max(a, b int) int {
+	if a > b{
+		return a
+	}
+	return b
 }

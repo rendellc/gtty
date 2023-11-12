@@ -25,5 +25,5 @@ var ViewFooter = func() lipgloss.Style {
 
 var MainView = func() lipgloss.Style {
 	b := lipgloss.RoundedBorder()
-	return lipgloss.NewStyle().BorderStyle(b)
+	return lipgloss.NewStyle().BorderStyle(b).Margin(0, 10)
 }()

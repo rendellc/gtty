@@ -11,7 +11,6 @@ type connectionSim struct {
 	period  time.Duration
 	rxChan  chan string
 	txChan  chan string
-	running bool
 }
 
 func SimulateConnection(period time.Duration) Connection {
@@ -19,13 +18,13 @@ func SimulateConnection(period time.Duration) Connection {
 		period:  period,
 		rxChan:  make(chan string),
 		txChan:  make(chan string),
-		running: false,
 	}
 
 	return c
 }
 
 func (c connectionSim) Start() error {
+	log.Printf("Starting connection")
 	go c.simulateWithLines()
 	return nil
 }
@@ -54,10 +53,6 @@ func (c *connectionSim) simulateWithLines() {
 	i := 0
 	data1 := 1.3
 	for {
-		if !c.running {
-			return
-		}
-
 		select {
 		case msg := <-c.txChan:
 			c.rxChan <- "echo: " + msg

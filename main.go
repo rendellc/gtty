@@ -60,7 +60,11 @@ func (a app) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	case tea.WindowSizeMsg:
 		a.width = msg.Width
 		a.height = msg.Height
+		footerView := a.footerView(a.command.View())
+		footerHeight := lipgloss.Height(footerView)
+
 		a.command.SetMaxWidth(a.width / 6)
+		a.terminal.SetVisibleLines(a.height - footerHeight)
 		a.help.Width = a.width
 		a.help.ShowAll = true
 		a.ready = true
@@ -133,12 +137,15 @@ func (a app) footerView(commandStr string) string {
 func (a app) View() string {
 	footerView := a.footerView(a.command.View())
 	footerHeight := lipgloss.Height(footerView)
-	mainStyle := style.MainView.Width(a.width - 2).Height(a.height - footerHeight - 2).Render
+	mainWidth := int(0.7*float32(a.width))
+	mainMargin := int((a.width - mainWidth) / 2)
+	mainStyle := style.MainView.Width(mainWidth).Height(a.height - footerHeight - 2).Margin(0, mainMargin).Render
 	terminalLines := a.height - footerHeight - 2
+	a.terminal.SetVisibleLines(terminalLines)
 
 	mainView := ""
 	if a.appView == appViewTerminal {
-		mainView = a.terminal.View(terminalLines)
+		mainView = a.terminal.View()
 	} else if a.appView == appViewOptions {
 		mainView = "option viewer"
 	} else if a.appView == appViewHelp {
@@ -154,6 +161,11 @@ func (a app) View() string {
 func main() {
 	config := appConfig{}
 	flag.BoolVar(&config.SimulateSerial, "sim", false, "Simulate serial data")
+	flag.StringVar(&config.SerialConfig.Device, "device", "COM8", "Serial device")
+	flag.IntVar(&config.SerialConfig.BaudRate, "baud", 9600, "Serial connection baud rate")
+	flag.IntVar(&config.SerialConfig.DataBits, "databits", 8, "Serial connection data bits")
+	flag.IntVar(&config.SerialConfig.StopBits, "stopbits", 1, "Serial connection stop bits")
+	flag.StringVar(&config.SerialConfig.Parity, "parity", "odd", "Serial connection parity")
 	flag.Parse()
 
 	f, err := tea.LogToFile("debug.log", "debug")
@@ -163,11 +175,6 @@ func main() {
 	}
 	defer f.Close()
 
-	config.SerialConfig.Device = "COM8"
-	config.SerialConfig.BaudRate = 9600
-	config.SerialConfig.DataBits = 8
-	config.SerialConfig.StopBits = 1
-	config.SerialConfig.Parity = "odd"
 	config.SerialConfig.Timeout = 5 * time.Second
 	config.SerialConfig.TransmitNewline = "\r\n"
 
@@ -182,6 +189,7 @@ func main() {
 
 	rx := connection.GetReceiver()
 	tx := connection.GetTransmitter()
+	connection.Start()
 
 	defer connection.Close()
 
