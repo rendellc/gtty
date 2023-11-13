@@ -23,6 +23,7 @@ type appView int
 
 const (
 	appViewTerminal appView = iota
+	appViewConnection
 	appViewOptions
 	appViewHelp
 	numberOfAppViews // note: keep at end
@@ -103,6 +104,8 @@ func (a app) getViewString() string {
 	switch a.appView {
 	case appViewTerminal:
 		return "terminal"
+	case appViewConnection:
+		return "connection"
 	case appViewOptions:
 		return "options"
 	case appViewHelp:
@@ -137,15 +140,17 @@ func (a app) footerView(commandStr string) string {
 func (a app) View() string {
 	footerView := a.footerView(a.command.View())
 	footerHeight := lipgloss.Height(footerView)
-	mainWidth := int(0.7*float32(a.width))
+	mainWidth := int(0.7 * float32(a.width))
 	mainMargin := int((a.width - mainWidth) / 2)
-	mainStyle := style.MainView.Width(mainWidth).Height(a.height - footerHeight - 2).Margin(0, mainMargin).Render
+	mainStyle := style.MainView.Width(mainWidth).Height(a.height-footerHeight-2).Margin(0, mainMargin).Render
 	terminalLines := a.height - footerHeight - 2
 	a.terminal.SetVisibleLines(terminalLines)
 
 	mainView := ""
 	if a.appView == appViewTerminal {
 		mainView = a.terminal.View()
+	} else if a.appView == appViewConnection {
+		mainView = fmt.Sprintf("configure connection:\n%+v", a.config)
 	} else if a.appView == appViewOptions {
 		mainView = "option viewer"
 	} else if a.appView == appViewHelp {
@@ -194,6 +199,7 @@ func main() {
 	defer connection.Close()
 
 	app := app{
+		config:     &config,
 		help:       help.New(),
 		keys:       keys,
 		connection: connection,
