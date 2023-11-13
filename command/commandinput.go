@@ -34,20 +34,11 @@ func CreateCommandInput(tx *serial.Transmitter) Model {
 	ti.CharLimit = 0
 	ti.Width = 0
 	ti.Cursor.BlinkSpeed = 1 * time.Second
-	ti.Blur()
+	ti.Focus()
 
 	return Model{
 		textInput: ti,
 		serialTx:  tx,
-	}
-}
-
-func (m *Model) SetEnabled(enabled bool) {
-	if enabled {
-		m.textInput.Focus()
-	} else {
-		m.textInput.Blur()
-		m.textInput.Placeholder = "connect to send commands"
 	}
 }
 

@@ -91,13 +91,14 @@ func (a app) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	}
 
 	// log.Printf("Main: got msg type: %T %v", msg, msg)
-	inputModel, cmd1 := a.command.Update(msg)
-	logModel, cmd2 := a.terminal.Update(msg)
+	var cmd tea.Cmd
+	var cmds []tea.Cmd
+	a.command, cmd = a.command.Update(msg)
+	cmds = append(cmds, cmd)
+	a.terminal, cmd = a.terminal.Update(msg)
+	cmds = append(cmds, cmd)
 
-	a.command = inputModel
-	a.terminal = logModel
-
-	return a, tea.Batch(cmd1, cmd2)
+	return a, tea.Batch(cmds...)
 }
 
 func (a app) getViewString() string {
