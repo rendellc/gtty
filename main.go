@@ -193,9 +193,9 @@ func main() {
 		connection = serial.CreateConnection(config.SerialConfig)
 	}
 
+	connection.Start()
 	rx := connection.GetReceiver()
 	tx := connection.GetTransmitter()
-	connection.Start()
 
 	defer connection.Close()
 
