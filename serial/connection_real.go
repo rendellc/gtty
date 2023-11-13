@@ -3,6 +3,7 @@ package serial
 import (
 	"fmt"
 	"log"
+	"strings"
 	"time"
 
 	"github.com/dsyx/serialport-go"
@@ -17,6 +18,7 @@ type connectionReal struct {
 	rxChan    chan string
 	txChan    chan string
 	rwChan    chan readWriterCommand
+	running   bool
 }
 
 type readWriterCommand int
@@ -60,16 +62,16 @@ func CreateConnection(config Config) Connection {
 		device:    config.Device,
 		config:    serialconfig,
 		txNewline: txNewline,
-		sp:      nil,
+		sp:        nil,
 		buf:       make([]byte, 256),
-		rxChan: make(chan string),
-		txChan: make(chan string),
-		rwChan: make(chan readWriterCommand),
+		rxChan:    make(chan string),
+		txChan:    make(chan string),
+		rwChan:    make(chan readWriterCommand),
 	}
 }
 
 func (c connectionReal) Start() error {
-	if c.rxChan != nil && c.txChan != nil {
+	if c.running {
 		return fmt.Errorf("already running")
 	}
 	var err error
@@ -79,6 +81,7 @@ func (c connectionReal) Start() error {
 	}
 
 	go c.serialReadWriter()
+
 
 	return nil
 }
@@ -101,12 +104,12 @@ func (c connectionReal) GetTransmitter() Transmitter {
 	return transmitter
 }
 
-
 func (c *connectionReal) serialReadWriter() {
 	rxChanRaw := make(chan string)
 	go c.serialReader(rxChanRaw)
 
 	for {
+		c.running = true
 		select {
 		case cmd := <-c.txChan:
 			err := c.writeSerial(cmd)
@@ -120,9 +123,12 @@ func (c *connectionReal) serialReadWriter() {
 			break
 		}
 	}
+
+	c.running = false
 }
 
 func (h *connectionReal) serialReader(out chan<- string) {
+	lineBuilder := strings.Builder{}
 	for {
 		readString := h.readSerial()
 		if len(readString) == 0 {
@@ -130,7 +136,37 @@ func (h *connectionReal) serialReader(out chan<- string) {
 			time.Sleep(d)
 			continue
 		}
-		out <- readString
+		readString = strings.ReplaceAll(readString, "\r\n", "\n") // normalize line endings
+		linesRead := strings.Split(readString, "\n")
+		for i, line := range linesRead {
+			// most of the time, both of these will 
+			// be true as we receive a couple of characters
+			isFirstLine := i == 0
+			isLastLine := i == len(linesRead) - 1
+			
+			if isFirstLine && isLastLine {
+				// first line received. It is a partial line
+				lineBuilder.WriteString(line)
+			} 
+			if isFirstLine && !isLastLine {
+				// first line received when we read multiple lines
+
+				lineBuilder.WriteString(line)
+				out <- lineBuilder.String()
+				lineBuilder.Reset()
+			}
+			if !isFirstLine && isLastLine {
+				// final line received when we read multiple lines
+				lineBuilder.WriteString(line)
+			}
+			if !isFirstLine && !isLastLine {
+				// readString is a complete line
+				// this is rare
+				out <- line
+				lineBuilder.Reset()
+			}
+
+		}
 	}
 }
 
