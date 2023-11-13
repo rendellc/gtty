@@ -12,7 +12,6 @@ type connectionReal struct {
 	device    string
 	config    serialport.Config
 	txNewline string
-	conn      *serialport.SerialPort
 	buf       []byte
 	sp        *serialport.SerialPort
 	rxChan    chan string
@@ -61,8 +60,11 @@ func CreateConnection(config Config) Connection {
 		device:    config.Device,
 		config:    serialconfig,
 		txNewline: txNewline,
-		conn:      nil,
+		sp:      nil,
 		buf:       make([]byte, 256),
+		rxChan: make(chan string),
+		txChan: make(chan string),
+		rwChan: make(chan readWriterCommand),
 	}
 }
 
@@ -75,10 +77,6 @@ func (c connectionReal) Start() error {
 	if err != nil {
 		return err
 	}
-
-	c.rxChan = make(chan string)
-	c.txChan = make(chan string)
-	c.rwChan = make(chan readWriterCommand)
 
 	go c.serialReadWriter()
 
@@ -137,11 +135,11 @@ func (h *connectionReal) serialReader(out chan<- string) {
 }
 
 func (c connectionReal) readSerial() string {
-	if c.conn == nil {
+	if c.sp == nil {
 		log.Fatalf("ReadSerial called, but connection is nil")
 	}
 
-	n, _ := c.conn.Read(c.buf)
+	n, _ := c.sp.Read(c.buf)
 	return string(c.buf[:n])
 }
 
