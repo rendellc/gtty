@@ -20,7 +20,6 @@ type InputSubmitMsg struct {
 
 func (m *Model) inputSubmitCmd(cmd string) tea.Cmd {
 	return func() tea.Msg {
-		m.serialTx.Send(cmd)
 		return InputSubmitMsg{
 			Input: cmd,
 		}

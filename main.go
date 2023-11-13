@@ -32,6 +32,7 @@ const (
 type appConfig struct {
 	SerialConfig   serial.Config
 	SimulateSerial bool
+	Leader  string
 }
 
 type app struct {
@@ -79,15 +80,20 @@ func (a app) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		case key.Matches(msg, a.keys.CycleView):
 			a.appView = appView((int(a.appView) + 1) % int(numberOfAppViews))
 			return a, nil
-		case key.Matches(msg, a.keys.Connect):
-			log.Printf("Connecting")
-			err := a.connection.Start()
-			if err != nil {
-				log.Printf("Error starting listener: %v", err.Error())
-			}
-
-			return a, nil
 		}
+	case command.InputSubmitMsg:
+		var cmd tea.Cmd
+		if strings.HasPrefix(msg.Input, a.config.Leader) {
+			a.handleLeaderCommandMsg(msg)
+		} else if a.appView == appViewTerminal {
+			a.connection.GetTransmitter().Send(msg.Input)
+			a.terminal, cmd = a.terminal.Update(msg)
+		} else if a.appView == appViewConnection {
+			a.handleConfigureCommandMsg(msg)
+		} else if a.appView == appViewOptions {
+		}
+
+		return a, cmd
 	}
 
 	// log.Printf("Main: got msg type: %T %v", msg, msg)
@@ -99,6 +105,22 @@ func (a app) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	cmds = append(cmds, cmd)
 
 	return a, tea.Batch(cmds...)
+}
+
+func (a* app) handleLeaderCommandMsg(msg command.InputSubmitMsg) {
+	input := msg.Input
+
+	inputFields := strings.Fields(input)
+
+	log.Printf("Leader command: %v", inputFields)
+}
+
+func (a* app) handleConfigureCommandMsg(msg command.InputSubmitMsg) {
+	input := msg.Input
+
+	inputFields := strings.Fields(input)
+
+	log.Printf("Command: %v", inputFields)
 }
 
 func (a app) getViewString() string {
@@ -151,7 +173,7 @@ func (a app) View() string {
 	if a.appView == appViewTerminal {
 		mainView = a.terminal.View()
 	} else if a.appView == appViewConnection {
-		mainView = fmt.Sprintf("configure connection:\n%+v", a.config)
+		mainView = viewConnectionConfig(a.config)
 	} else if a.appView == appViewOptions {
 		mainView = "option viewer"
 	} else if a.appView == appViewHelp {
@@ -172,6 +194,7 @@ func main() {
 	flag.IntVar(&config.SerialConfig.DataBits, "databits", 8, "Serial connection data bits")
 	flag.IntVar(&config.SerialConfig.StopBits, "stopbits", 1, "Serial connection stop bits")
 	flag.StringVar(&config.SerialConfig.Parity, "parity", "odd", "Serial connection parity")
+	flag.StringVar(&config.Leader, "leader", ":", "Leader key for use with internal commands")
 	flag.Parse()
 
 	f, err := tea.LogToFile("debug.log", "debug")
@@ -188,12 +211,11 @@ func main() {
 
 	var connection serial.Connection
 	if config.SimulateSerial {
-		connection = serial.SimulateConnection(100 * time.Millisecond)
+		connection = serial.SimulateConnection(500 * time.Millisecond)
 	} else {
 		connection = serial.CreateConnection(config.SerialConfig)
 	}
 
-	connection.Start()
 	rx := connection.GetReceiver()
 	tx := connection.GetTransmitter()
 

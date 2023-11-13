@@ -4,6 +4,8 @@ import (
 	"github.com/charmbracelet/lipgloss"
 )
 
+func col(x string) lipgloss.Color { return lipgloss.Color(x) }
+
 var CommandFooter = func() lipgloss.Style {
 	b := lipgloss.RoundedBorder()
 	b.Right = "├"
@@ -27,3 +29,8 @@ var MainView = func() lipgloss.Style {
 	b := lipgloss.RoundedBorder()
 	return lipgloss.NewStyle().BorderStyle(b).Margin(0, 10)
 }()
+
+var ConfItem = lipgloss.NewStyle()
+var ConfItemLabel = lipgloss.NewStyle().Width(10)
+var ConfItemValue = lipgloss.NewStyle().Width(10).Align(lipgloss.Right)
+
