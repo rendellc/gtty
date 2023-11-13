@@ -32,20 +32,21 @@ const (
 type appConfig struct {
 	SerialConfig   serial.Config
 	SimulateSerial bool
-	Leader  string
+	Leader         string
 }
 
 type app struct {
-	help       help.Model
-	keys       keyMap
-	command    command.Model
-	terminal   terminal.Model
-	connection serial.Connection
-	config     *appConfig
-	appView    appView
-	width      int
-	height     int
-	ready      bool
+	help         help.Model
+	keys         keyMap
+	command      command.Model
+	terminal     terminal.Model
+	connection   serial.Connection
+	configurator configurator
+	config       *appConfig
+	appView      appView
+	width        int
+	height       int
+	ready        bool
 }
 
 func (a app) Init() tea.Cmd {
@@ -89,7 +90,6 @@ func (a app) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			a.connection.GetTransmitter().Send(msg.Input)
 			a.terminal, cmd = a.terminal.Update(msg)
 		} else if a.appView == appViewConnection {
-			a.handleConfigureCommandMsg(msg)
 		} else if a.appView == appViewOptions {
 		}
 
@@ -107,20 +107,9 @@ func (a app) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	return a, tea.Batch(cmds...)
 }
 
-func (a* app) handleLeaderCommandMsg(msg command.InputSubmitMsg) {
-	input := msg.Input
-
-	inputFields := strings.Fields(input)
-
-	log.Printf("Leader command: %v", inputFields)
-}
-
-func (a* app) handleConfigureCommandMsg(msg command.InputSubmitMsg) {
-	input := msg.Input
-
-	inputFields := strings.Fields(input)
-
-	log.Printf("Command: %v", inputFields)
+func (a *app) handleLeaderCommandMsg(msg command.InputSubmitMsg) {
+	cmd := strings.TrimPrefix(msg.Input, a.config.Leader)
+	a.configurator.DoCommand(cmd, a.config)
 }
 
 func (a app) getViewString() string {
@@ -229,6 +218,7 @@ func main() {
 		command:    command.CreateCommandInput(&tx),
 		terminal:   terminal.CreateFlowModel(&rx),
 		ready:      false,
+		configurator: NewConfigurator(),
 	}
 
 	if _, err := tea.NewProgram(app).Run(); err != nil {

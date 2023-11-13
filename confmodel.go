@@ -2,10 +2,51 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"strings"
+	"strconv"
 
 	"rendellc/gtty/style"
 )
+
+
+type configurator struct{}
+
+func NewConfigurator() configurator {
+	return configurator{}
+}
+
+func (c configurator) doSetCommand(params []string, config *appConfig) {
+	if len(params) < 2 {
+		return
+	}
+
+	target := params[0]
+	value := params[1]
+	valueInt, intParseErr := strconv.Atoi(value)
+	switch {
+	case target == "Device":
+		log.Printf("Updating Device to " + value)
+		config.SerialConfig.Device = value
+	case target == "BaudRate" && intParseErr == nil:
+		log.Printf("Updating BaudRate to " + value)
+		config.SerialConfig.BaudRate = valueInt
+	}
+}
+
+func (c configurator) DoCommand(cmd string, config *appConfig) {
+	fields := strings.Fields(cmd)
+	log.Printf("Command: %v", fields)
+
+	if len(fields) == 0 {
+		return
+	}
+
+	if fields[0] == "set" {
+		c.doSetCommand(fields[1:], config)
+	}
+}
+
 
 type ConfItem struct {
 	Label string
