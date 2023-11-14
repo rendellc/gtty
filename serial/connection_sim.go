@@ -11,6 +11,7 @@ type connectionSim struct {
 	period  time.Duration
 	rxChan  chan string
 	txChan  chan string
+	rwChan  chan string
 }
 
 func SimulateConnection(period time.Duration) Connection {
@@ -18,6 +19,7 @@ func SimulateConnection(period time.Duration) Connection {
 		period:  period,
 		rxChan:  make(chan string),
 		txChan:  make(chan string),
+		rwChan:  make(chan string),
 	}
 
 	return c
@@ -29,7 +31,9 @@ func (c connectionSim) Start() error {
 	return nil
 }
 
-func (c connectionSim) Close() {}
+func (c connectionSim) Close() {
+	c.rwChan <- ""
+}
 
 func (c connectionSim) GetReceiver() Receiver {
 	receiver := Receiver{
@@ -54,6 +58,8 @@ func (c *connectionSim) simulateWithLines() {
 	data1 := 1.3
 	for {
 		select {
+		case <-c.rwChan:
+			return
 		case msg := <-c.txChan:
 			c.rxChan <- "echo: " + msg
 

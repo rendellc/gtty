@@ -109,7 +109,15 @@ func (a app) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 func (a *app) handleLeaderCommandMsg(msg command.InputSubmitMsg) {
 	cmd := strings.TrimPrefix(msg.Input, a.config.Leader)
-	a.configurator.DoCommand(cmd, a.config)
+
+	if strings.HasPrefix(cmd, "connect") {
+		a.connection.Start()
+	} else if strings.HasPrefix(cmd, "disconnect") {
+		a.connection.Close()
+	} else {
+		a.configurator.DoCommand(cmd, a.config)
+	}
+
 }
 
 func (a app) getViewString() string {
